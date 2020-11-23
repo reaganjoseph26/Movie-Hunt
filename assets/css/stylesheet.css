@@ -1,0 +1,17 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("../images/Background-img.jpg");
+}
+
+nav ul a  {
+    font-size: 30px;
+}
+
+
+
+
+
+
