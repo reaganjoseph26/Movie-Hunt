@@ -170,8 +170,9 @@ var displayMostPopular = function(data)
 
     for (var i = 0; i < 5; i++)
     {
-        var baseUrl = "https://image.tmdb.org/t/p/w300"
+        var baseUrl = "https://image.tmdb.org/t/p/w200"
         var popImg = document.createElement("img");
+        popImg.style.padding = "1px"
         popImg.src = baseUrl + data.results[i].poster_path;
         popMovie.appendChild(popImg);
     }
