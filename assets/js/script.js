@@ -141,6 +141,9 @@
 var popMovie = document.querySelector("#most-popular");
 var mostPopularImg = document.querySelector("#most-popular-img");
 
+window.onload = function WindowLoad() {
+    getMostPopular();
+}
 var getMostPopular = function()
 {
     var tmdbApiUrl = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=b5a9c03b27f6c897638c6e5f922cad8d"
@@ -159,18 +162,18 @@ var getMostPopular = function()
     });
 };
 
+// As of right now to get an img to show you have to call the getMostPopular() in the console
+
 var displayMostPopular = function(data)
 {
+    popMovie.innerHTML = "";
 
-
-    var baseUrl = "https://image.tmdb.org/t/p/w300/"
-
-    mostPopularImg.src = baseUrl + data.results[0].poster_path;
-
+    for (var i = 0; i < 5; i++)
+    {
+        var baseUrl = "https://image.tmdb.org/t/p/w300"
+        var popImg = document.createElement("img");
+        popImg.src = baseUrl + data.results[i].poster_path;
+        popMovie.appendChild(popImg);
+    }
 };
-
-
-
-
-
 
