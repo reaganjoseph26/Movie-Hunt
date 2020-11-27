@@ -177,3 +177,23 @@ var displayMostPopular = function(data)
     }
 };
 
+var getNewReleases = function()
+{
+    var currDate = moment().format("MM-DD-YYYY");
+    var pastDate = moment().subtract(30, 'days')
+
+    var tmdbApiUrl = "https://api.themoviedb.org/3/discover/movie?primary_release_date.gte=" + currDate + "&primary_release_date.lte=" + pastDate + "&api_key=b5a9c03b27f6c897638c6e5f922cad8d"
+
+    fetch(tmdbApiUrl).then(function(response)
+    {
+        if (response.ok)
+        {
+            response.json().then(function(data)
+            {
+                console.log(data);
+
+            });
+        }
+    });
+};
+
