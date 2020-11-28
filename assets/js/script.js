@@ -139,13 +139,15 @@
 
 
 var popMovie = document.querySelector("#most-popular");
-var newReleases = document.querySelector("#new-releases")
+var newReleases = document.querySelector("#new-releases");
+var critAcclaimed = document.querySelector("#critically-acclaimed");
 var mostPopularImg = document.querySelector("#most-popular-img");
 
 window.onload = function WindowLoad() {
     getMostPopular();
     getNewReleases();
-}
+    getCriticallyAcclaimed();
+};
 var getMostPopular = function()
 {
     var tmdbApiUrl = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=b5a9c03b27f6c897638c6e5f922cad8d"
@@ -156,7 +158,6 @@ var getMostPopular = function()
         {
             response.json().then(function(data)
             {
-                console.log(data);
                 displayMostPopular(data);
             });
         }
@@ -176,5 +177,70 @@ var displayMostPopular = function(data)
         popImg.style.padding = "1px"
         popImg.src = baseUrl + data.results[i].poster_path;
         popMovie.appendChild(popImg);
+    }
+};
+
+var getNewReleases = function()
+{
+    var currDate = moment().format("YYYY-MM-DD");
+    var pastDate = moment().subtract(30, 'days')
+
+    // var tmdbApiUrl = "https://api.themoviedb.org/3/discover/movie?primary_release_date.gte=" + currDate + "&primary_release_date.lte=" + pastDate + "&api_key=b5a9c03b27f6c897638c6e5f922cad8d"
+    var tmdbApiUrl = "https://api.themoviedb.org/3/discover/movie?api_key=b5a9c03b27f6c897638c6e5f922cad8d&language=en-US&region=US&sort_by=primary_release_date.desc&include_adult=false&include_video=false&release_date.gte=" + pastDate + "&release_date.lte=" + currDate + "&with_release_type=3"
+    fetch(tmdbApiUrl).then(function(response)
+    {
+        if (response.ok)
+        {
+            response.json().then(function(data)
+            {
+                displayNewReleases(data);
+            });
+        }
+    });
+};
+
+
+var displayNewReleases = function(data)
+{
+    for (var i = 0; i < 5; i++)
+    {
+        var baseUrl = "https://image.tmdb.org/t/p/w300"
+        var newReleaseImg = document.createElement("img");
+        newReleaseImg.style.padding = "1px"
+        newReleaseImg.src = baseUrl + data.results[i].poster_path;
+        newReleases.appendChild(newReleaseImg);
+    }
+};
+
+var getCriticallyAcclaimed = function()
+{
+    var tmdbApiUrl = "https://api.themoviedb.org/3/discover/movie?api_key=b5a9c03b27f6c897638c6e5f922cad8d&language=en-US&region=US&sort_by=vote_average.desc&include_adult=false&include_video=false&page=1&with_release_type=3&vote_count.gte=15000"
+
+    fetch(tmdbApiUrl).then(function(response)
+    {
+        if (response.ok)
+        {
+            response.json().then(function(data)
+            {
+                console.log(data);
+                displayCriticallyAcclaimed(data);
+            });
+        }
+    });
+};
+
+// As of right now to get an img to show you have to call the getMostPopular() in the console
+
+var displayCriticallyAcclaimed = function(data)
+{
+    
+
+    for (var i = 0; i < 5; i++)
+    {
+        var baseUrl = "https://image.tmdb.org/t/p/w200"
+        var critImg = document.createElement("img");
+        critImg.style.padding = "1px"
+        critImg.src = baseUrl + data.results[i].poster_path;
+        critAcclaimed.appendChild(critImg);
     }
 };
