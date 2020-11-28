@@ -177,4 +177,3 @@ var displayMostPopular = function(data)
         popMovie.appendChild(popImg);
     }
 };
-
