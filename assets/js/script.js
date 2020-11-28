@@ -71,20 +71,7 @@
 //     });
 // };
 
-// var displayMovie = function(data)
-// {
-//     var currTitle = document.querySelector("#current-title-genre");
-//     var currActors = document.querySelector("#current-actors");
-//     var currReleaseDate = document.querySelector("#current-rDate");
-//     var currRated = document.querySelector("#current-rated");
-//     var currPlot = document.querySelector("#current-plot");
 
-//     currTitle.textContent = data.Title + data.Genre;
-//     currActors.textContent = data.Actors;
-//     currReleaseDate.textContent = data.Released;
-//     currRated.textContent = data.Rated;
-//     currPlot.textContent = data.Plot;
-// };
 
 // var saveMovie = function(movie)
 // {
@@ -165,18 +152,23 @@ var getMostPopular = function()
     });
 };
 
-// As of right now to get an img to show you have to call the getMostPopular() in the console
-
 var displayMostPopular = function (data) {
     popMovie.innerHTML = "";
 
     for (var i = 0; i < 5; i++) {
         var baseUrl = "https://image.tmdb.org/t/p/w200"
+
+        var popLink = document.createElement("a");
+        popLink.setAttribute('href', 'movie-info.html?id=' + data.results[i].id)
+
+
         var popImg = document.createElement("img");
         popImg.style.padding = "1px"
         popImg.style.transition = "0.3s"
         popImg.src = baseUrl + data.results[i].poster_path;
-        popMovie.appendChild(popImg);
+
+        popLink.appendChild(popImg);
+        popMovie.appendChild(popLink);
 
         // This handler will be executed every time the cursor is moved over a different list item
         popImg.addEventListener("mouseover", function (event) {
@@ -198,7 +190,6 @@ var getNewReleases = function()
     var currDate = moment().format("YYYY-MM-DD");
     var pastDate = moment().subtract(30, 'days')
 
-    // var tmdbApiUrl = "https://api.themoviedb.org/3/discover/movie?primary_release_date.gte=" + currDate + "&primary_release_date.lte=" + pastDate + "&api_key=b5a9c03b27f6c897638c6e5f922cad8d"
     var tmdbApiUrl = "https://api.themoviedb.org/3/discover/movie?api_key=b5a9c03b27f6c897638c6e5f922cad8d&language=en-US&region=US&sort_by=primary_release_date.desc&include_adult=false&include_video=false&release_date.gte=" + pastDate + "&release_date.lte=" + currDate + "&with_release_type=3"
     fetch(tmdbApiUrl).then(function(response)
     {
@@ -215,13 +206,32 @@ var getNewReleases = function()
 
 var displayNewReleases = function(data)
 {
-    for (var i = 0; i < 5; i++)
+    for (var i = 1; i < 6; i++)
     {
-        var baseUrl = "https://image.tmdb.org/t/p/w300"
+        var baseUrl = "https://image.tmdb.org/t/p/w200"
+
+        var popLink = document.createElement("a");
+        popLink.setAttribute('href', 'movie-info.html?id=' + data.results[i].id)
+
         var newReleaseImg = document.createElement("img");
         newReleaseImg.style.padding = "1px"
         newReleaseImg.src = baseUrl + data.results[i].poster_path;
         newReleases.appendChild(newReleaseImg);
+
+        popLink.appendChild(newReleaseImg);
+        newReleases.appendChild(popLink);
+
+        // This handler will be executed every time the cursor is moved over a different list item
+        newReleaseImg.addEventListener("mouseover", function (event) {
+            // highlight the mouseover target
+            event.target.style.opacity = "0.5";
+            event.target.style.transition = "0.3s"
+
+            // reset the styles after a short delay
+            setTimeout(function () {
+                event.target.style.opacity = "";
+            }, 900);
+        }, false);
     }
 };
 
@@ -251,9 +261,30 @@ var displayCriticallyAcclaimed = function(data)
     for (var i = 0; i < 5; i++)
     {
         var baseUrl = "https://image.tmdb.org/t/p/w200"
+
+        var popLink = document.createElement("a");
+        popLink.setAttribute('href', 'movie-info.html?id=' + data.results[i].id)
+
         var critImg = document.createElement("img");
         critImg.style.padding = "1px"
         critImg.src = baseUrl + data.results[i].poster_path;
         critAcclaimed.appendChild(critImg);
+
+        popLink.appendChild(critImg);
+        critAcclaimed.appendChild(popLink);
+
+        // This handler will be executed every time the cursor is moved over a different list item
+        critImg.addEventListener("mouseover", function (event) {
+            // highlight the mouseover target
+            event.target.style.opacity = "0.5";
+            event.target.style.transition = "0.3s"
+
+            // reset the styles after a short delay
+            setTimeout(function () {
+                event.target.style.opacity = "";
+            }, 900);
+        }, false);
     }
 };
+
+
