@@ -139,11 +139,13 @@
 
 
 var popMovie = document.querySelector("#most-popular");
+var newReleases = document.querySelector("#new-releases")
 var mostPopularImg = document.querySelector("#most-popular-img");
 
 
 window.onload = function WindowLoad() {
     getMostPopular();
+    getNewReleases();
 }
 var getMostPopular = function () {
     var tmdbApiUrl = "https://api.themoviedb.org/3/movie/popular?api_key=a01b6212f3bbba093d5cbc6d345df704&language=en-US&page=1"
@@ -151,7 +153,6 @@ var getMostPopular = function () {
         if (response.ok) {
             response.json().then(function (data) {
                 console.log(data);
-
                 displayMostPopular(data);
             });
         }
@@ -186,17 +187,35 @@ var displayMostPopular = function (data) {
 
 };
 
-// // This handler will be executed every time the cursor is moved over a different list item
-// popImg.addEventListener("mouseover", function( event ) {   
-//     // highlight the mouseover target
-//     event.target.style.opacity = "0.5";
-//     event.target.style.transition = "0.3s"
+var getNewReleases = function()
+{
+    var currDate = moment().format("YYYY-MM-DD");
+    var pastDate = moment().subtract(30, 'days')
 
-//     // reset the styles after a short delay
-//   setTimeout(function() {
-//     event.target.style.opacity = "";
-//   }, 900);
-// }, false);
+    // var tmdbApiUrl = "https://api.themoviedb.org/3/discover/movie?primary_release_date.gte=" + currDate + "&primary_release_date.lte=" + pastDate + "&api_key=b5a9c03b27f6c897638c6e5f922cad8d"
+    var tmdbApiUrl = "https://api.themoviedb.org/3/discover/movie?api_key=b5a9c03b27f6c897638c6e5f922cad8d&language=en-US&region=US&sort_by=primary_release_date.desc&include_adult=false&include_video=false&release_date.gte=" + pastDate + "&release_date.lte=" + currDate + "&with_release_type=3"
+    fetch(tmdbApiUrl).then(function(response)
+    {
+        if (response.ok)
+        {
+            response.json().then(function(data)
+            {
+                displayNewReleases(data);
+                console.log(data);
+
+            });
+        }
+    });
+};
 
 
-
+var displayNewReleases = function(data)
+{
+    for (var i = 0; i < 5; i++)
+    {
+        var baseUrl = "https://image.tmdb.org/t/p/w300"
+        var newReleaseImg = document.createElement("img");
+        newReleaseImg.src = baseUrl + data.results[i].poster_path;
+        newReleases.appendChild(newReleaseImg);
+    }
+};
