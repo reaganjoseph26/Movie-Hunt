@@ -139,10 +139,12 @@
 
 
 var popMovie = document.querySelector("#most-popular");
+var newReleases = document.querySelector("#new-releases")
 var mostPopularImg = document.querySelector("#most-popular-img");
 
 window.onload = function WindowLoad() {
     getMostPopular();
+    getNewReleases();
 }
 var getMostPopular = function()
 {
@@ -155,7 +157,6 @@ var getMostPopular = function()
             response.json().then(function(data)
             {
                 console.log(data);
-
                 displayMostPopular(data);
             });
         }
