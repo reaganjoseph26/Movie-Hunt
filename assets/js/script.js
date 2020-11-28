@@ -163,7 +163,6 @@ var getMostPopular = function()
     });
 };
 
-// As of right now to get an img to show you have to call the getMostPopular() in the console
 
 var displayMostPopular = function(data)
 {
@@ -183,7 +182,6 @@ var getNewReleases = function()
     var currDate = moment().format("YYYY-MM-DD");
     var pastDate = moment().subtract(30, 'days')
 
-    // var tmdbApiUrl = "https://api.themoviedb.org/3/discover/movie?primary_release_date.gte=" + currDate + "&primary_release_date.lte=" + pastDate + "&api_key=b5a9c03b27f6c897638c6e5f922cad8d"
     var tmdbApiUrl = "https://api.themoviedb.org/3/discover/movie?api_key=b5a9c03b27f6c897638c6e5f922cad8d&language=en-US&region=US&sort_by=primary_release_date.desc&include_adult=false&include_video=false&release_date.gte=" + pastDate + "&release_date.lte=" + currDate + "&with_release_type=3"
     fetch(tmdbApiUrl).then(function(response)
     {
