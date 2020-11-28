@@ -2,14 +2,36 @@
     box-sizing: border-box;
 }
  body {
-     background-color: black;  
+     background-color:white;  
  }
 
  h3 {
-     color: white;
+     color: black;
+     text-align: center;background-color: silver;
+
  }
 nav ul a  {
     font-size: 20px;
  
 }
+
+nav ul a:hover {
+    color: red;
+}
+
+
+#search-bar {
+    margin-left: 30pc;
+}
+
+.pagination {
+    font-size: 30px;
+    
+}
+
+.pagination a {
+    color: black;
+}
+
+
 

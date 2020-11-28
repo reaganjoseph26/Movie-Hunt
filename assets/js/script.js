@@ -107,7 +107,7 @@
 //     if (movieArr && movieArr.length > 0)
 //     {
 //         newMovieArr = [...new Set(movieArr)];
-        
+
 //         for (var i = 0; i < newMovieArr.length; i++)
 //         {
 //             var recentMovies = document.createElement("button");
@@ -115,7 +115,7 @@
 //             recentMovies.setAttribute("value", newMovieArr[i]);
 //             recentMovies.textContent = newMovieArr[i];
 //             recentMovieEl.appendChild(recentMovies);
-            
+
 //         }
 //     }
 // };
@@ -141,19 +141,15 @@
 var popMovie = document.querySelector("#most-popular");
 var mostPopularImg = document.querySelector("#most-popular-img");
 
+
 window.onload = function WindowLoad() {
     getMostPopular();
 }
-var getMostPopular = function()
-{
-    var tmdbApiUrl = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=b5a9c03b27f6c897638c6e5f922cad8d"
-
-    fetch(tmdbApiUrl).then(function(response)
-    {
-        if (response.ok)
-        {
-            response.json().then(function(data)
-            {
+var getMostPopular = function () {
+    var tmdbApiUrl = "https://api.themoviedb.org/3/movie/popular?api_key=a01b6212f3bbba093d5cbc6d345df704&language=en-US&page=1"
+    fetch(tmdbApiUrl).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (data) {
                 console.log(data);
 
                 displayMostPopular(data);
@@ -164,17 +160,43 @@ var getMostPopular = function()
 
 // As of right now to get an img to show you have to call the getMostPopular() in the console
 
-var displayMostPopular = function(data)
-{
+var displayMostPopular = function (data) {
     popMovie.innerHTML = "";
 
-    for (var i = 0; i < 5; i++)
-    {
+    for (var i = 0; i < 5; i++) {
         var baseUrl = "https://image.tmdb.org/t/p/w200"
         var popImg = document.createElement("img");
         popImg.style.padding = "1px"
+        popImg.style.transition = "0.3s"
         popImg.src = baseUrl + data.results[i].poster_path;
         popMovie.appendChild(popImg);
+
+        // This handler will be executed every time the cursor is moved over a different list item
+        popImg.addEventListener("mouseover", function (event) {
+            // highlight the mouseover target
+            event.target.style.opacity = "0.5";
+            event.target.style.transition = "0.3s"
+
+            // reset the styles after a short delay
+            setTimeout(function () {
+                event.target.style.opacity = "";
+            }, 900);
+        }, false);
     }
+
 };
+
+// // This handler will be executed every time the cursor is moved over a different list item
+// popImg.addEventListener("mouseover", function( event ) {   
+//     // highlight the mouseover target
+//     event.target.style.opacity = "0.5";
+//     event.target.style.transition = "0.3s"
+
+//     // reset the styles after a short delay
+//   setTimeout(function() {
+//     event.target.style.opacity = "";
+//   }, 900);
+// }, false);
+
+
 
