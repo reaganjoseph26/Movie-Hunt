@@ -24,6 +24,10 @@ nav ul a:hover {
     margin-left: 30pc;
 }
 
+input {
+    color: white
+}
+
 .pagination {
     font-size: 30px;
     

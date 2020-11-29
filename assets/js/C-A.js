@@ -1,18 +1,18 @@
-var popMovie = document.querySelector("#most-popular");
+var criticallyAcclaimedMovie = document.querySelector("#critically-acclaimed");
 // var mostPopularImg = document.querySelector("#most-popular-img");
 // var pagesEl = document.querySelector(".page-btn")
 
 window.onload = function WindowLoad() {
-    getMostPopular(1);
+    getCa(1);
 }
-var getMostPopular = function (page) {
-    var tmdbApiUrl = "https://api.themoviedb.org/3/movie/popular?api_key=a01b6212f3bbba093d5cbc6d345df704&language=en-US&page=" + page
+var getCa= function (page) {
+    var tmdbApiUrl = "https://api.themoviedb.org/3/discover/movie?api_key=b5a9c03b27f6c897638c6e5f922cad8d&language=en-US&region=US&sort_by=vote_average.desc&include_adult=false&include_video=false&with_release_type=3&vote_count.gte=10000&page=" + page
     fetch(tmdbApiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
                 console.log(data);
 
-                displayMostPopular(data);
+                displayCa(data);
             });
         }
     });
@@ -20,8 +20,8 @@ var getMostPopular = function (page) {
 
 // As of right now to get an img to show you have to call the getMostPopular() in the console
 
-var displayMostPopular = function (data) {
-    popMovie.innerHTML = "";
+var displayCa = function (data) {
+    criticallyAcclaimedMovie.innerHTML = "";
 
     for (var i = 0; i < 20; i++) {
         var baseUrl = "https://image.tmdb.org/t/p/w200"
@@ -30,16 +30,16 @@ var displayMostPopular = function (data) {
         popLink.setAttribute('href', 'movie-info.html?id=' + data.results[i].id)
 
 
-        var popImg = document.createElement("img");
-        popImg.style.padding = "1px"
-        popImg.style.transition = "0.3s"
-        popImg.src = baseUrl + data.results[i].poster_path;
+        var newReleaseImg = document.createElement("img");
+        newReleaseImg.style.padding = "1px"
+        newReleaseImg.style.transition = "0.3s"
+        newReleaseImg.src = baseUrl + data.results[i].poster_path;
 
-        popLink.appendChild(popImg);
-        popMovie.appendChild(popLink);
+        popLink.appendChild(newReleaseImg);
+        criticallyAcclaimedMovie.appendChild(popLink);
 
         // This handler will be executed every time the cursor is moved over a different list item
-        popImg.addEventListener("mouseover", function (event) {
+        newReleaseImg.addEventListener("mouseover", function (event) {
             // highlight the mouseover target
             event.target.style.opacity = "0.5";
             event.target.style.transition = "0.3s"
@@ -54,14 +54,6 @@ var displayMostPopular = function (data) {
 };
 
     $(".page-btn").on("click", function () {
-        getMostPopular($(this).text());
+        getCa($(this).text());
         console.log($(this).text());
     })
-
-// var pagination = function() {
-//     console.log()
-//     // var popularpageTwo = document.createElement("div")
-// }
-
-// pagination()
-
