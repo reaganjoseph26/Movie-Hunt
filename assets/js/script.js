@@ -128,6 +128,8 @@
 var popMovie = document.querySelector("#most-popular");
 var newReleases = document.querySelector("#new-releases");
 var critAcclaimed = document.querySelector("#critically-acclaimed");
+var movieSearch = document.querySelector("#movie-search");
+var movieForm = document.querySelector("#movie-form");
 var mostPopularImg = document.querySelector("#most-popular-img");
 
 
@@ -287,4 +289,34 @@ var displayCriticallyAcclaimed = function(data)
     }
 };
 
+var formHandler = function(event)
+{
+    event.preventDefault();
 
+    var movieName = movieSearch.value.trim();
+    if (movieName)
+    {
+        getMovie(movieName);
+        movieSearch.value = "";
+        console.log(movieName);
+    }
+};
+
+var getMovie = function(movie) 
+{
+    var tmdbApiUrl = "https://api.themoviedb.org/3/search/movie?api_key=b5a9c03b27f6c897638c6e5f922cad8d&language=en-US&query=" + movie + "&page=1&include_adult=false";
+
+    fetch(tmdbApiUrl).then(function(response)
+    {
+        if (response.ok)
+        {
+            response.json().then(function(data)
+            {
+                
+                console.log(data);
+            });
+        }
+    });
+};
+
+movieForm.addEventListener("submit", formHandler);
