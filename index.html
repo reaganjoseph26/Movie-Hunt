@@ -1,88 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Hunt</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="assets/css/stylesheet.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Movie Hunt</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link rel="stylesheet" href="assets/css/stylesheet.css">
+    </head>
 
-<body>
-    <main>
-        <nav>
-            <div class="nav-wrapper blue-grey darken-3">
-              <a href="#" class="brand-logo right">Logo</a>
-              <ul id="nav-mobile" class="hide-on-med-and-down">
-                <li><a class="active" href="index.html">Home</a></li>
-                <li><a href="most-popular.html">Most Popular</a></li>
-                <li><a href="new-releases.html">New Releases</a></li>
-                <li><a href="C-A.html">Critically Acclaimed</a></li>
-                <li><a href="favorites.html">Favorites</a></li>
-                <li><input type="text" placeholder="Search.."></li>
-              </ul>
-            </div>
-          </nav>
-       <!-- "Most Popular"-->
-        <div class="container">
-            <div class="row">
-                <div class="col-s9">
-                    <h3>Most Popular</h3>
-                    <div class=row>
-                    <div class="col-12 s12 m6">
-                        <div class="card green">
-                          <div class="card-image" >
-                            <!-- <img src="images/sample-1.jpg" id="most-popular-img"> -->
-                          </div>
-                          <div class="card-content" id="most-popular">
-                              <p>preview to most popular films.</p>
-                        </div>
-                      </div>
-                    </div>
+    <body>
+        <main>
+            <nav>
+                <div class="nav-wrapper black">
+                    <a href="#" class="brand-logo right">Logo</a>
+                    <ul id="nav-mobile" class="hide-on-med-and-down">
+                        <li><a class="active" href="index.html">Home</a></li>
+                        <li><a href="most-popular.html">Most Popular</a></li>
+                        <li><a href="new-releases.html">New Releases</a></li>
+                        <li><a href="C-A.html">Critically Acclaimed</a></li>
+                        <li><a href="favorites.html">Favorites</a></li>
+                        <li id="search-bar"><form id="movie-form"><input type="text" id="movie-search" placeholder="Search.."></form></li>
+                    </ul>
                 </div>
+            </nav>
 
-                     <!-- "New Releases"-->
+            <!-- "Most Popular"-->
             <div class="container">
                 <div class="row">
-                <div class="col-s9">
-                    <h3>New Releases</h3>
-                    <div class=row>
-                        <div class="col s12 m6">
-                            <div class="card green">
-                    <div class="card-content" id="new-releases">
-                        <p>preview to new released films.</p>
-                      </div>
+                    <div class="col-s9">
+                        <h3>Most Popular</h3>
+                        <div class=row>
+                            <div class="col-12 s12 m6">
+                                <div class="">
+                                    <div class="card-image">
+                                        <!-- <img src="images/sample-1.jpg" id="most-popular-img"> -->
+                                    </div>
+                                    <div class="card-content" id="most-popular">
+                                        <p>preview to most popular films.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- "New Releases"-->
+                    <div class="row">
+                        <div class="col-s9">
+                            <h3>New Releases</h3>
+                            <div class=row>
+                                <div class="col-12 s12 m6">
+                                    <div class="card-content" id="new-releases">
+
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- "Critically Acclaimed"-->
+
+                        <div class="row">
+                            <div class="col-s9">
+                                <h3>Critically Acclaimed</h3>
+                                <div class=row>
+                                    <div class="col-12 s12 m6">
+                                        
+                                    <div class="card-content" id="critically-acclaimed">
+                                
+                                </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </main>
 
-             <!-- "Critically Acclaimed"-->
-        <div class="container">
-            <div class="row">
-                <div class="col-s9">
-                    <h3>Critically Acclaimed</h3>
-                    <div class=row>
-                        <div class="col s12 m6">
-                            <div class="card green">
-                    <div class="card-content">
-                        <p>preview to critically acclaimed films.</p>
-                      </div>
-                    </div>
+        <footer class="page-footer black">
+            <div class="container">
+              <div class="row">
+                <div class="col l6 s12">
+                  <h5 class="white-text">Footer Content</h5>
+                  <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
                 </div>
+                <div class="col l4 offset-l2 s12">
+                  <h5 class="white-text">Links</h5>
+                  
+                </div>
+              </div>
             </div>
-        </div>
-    </div>
-    </main>
+            <div class="footer-copyright">
+              <div class="container">
+              © 2020 Copyright Move Hunt
+              </div>
+            </div>
+          </footer>
+              
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="assets/js/script.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+        <script src="assets/js/script.js"></script>
+        
+        
 
-</body>
+    </body>
 
 </html>
-

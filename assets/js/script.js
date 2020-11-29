@@ -71,20 +71,7 @@
 //     });
 // };
 
-// var displayMovie = function(data)
-// {
-//     var currTitle = document.querySelector("#current-title-genre");
-//     var currActors = document.querySelector("#current-actors");
-//     var currReleaseDate = document.querySelector("#current-rDate");
-//     var currRated = document.querySelector("#current-rated");
-//     var currPlot = document.querySelector("#current-plot");
 
-//     currTitle.textContent = data.Title + data.Genre;
-//     currActors.textContent = data.Actors;
-//     currReleaseDate.textContent = data.Released;
-//     currRated.textContent = data.Rated;
-//     currPlot.textContent = data.Plot;
-// };
 
 // var saveMovie = function(movie)
 // {
@@ -107,7 +94,7 @@
 //     if (movieArr && movieArr.length > 0)
 //     {
 //         newMovieArr = [...new Set(movieArr)];
-        
+
 //         for (var i = 0; i < newMovieArr.length; i++)
 //         {
 //             var recentMovies = document.createElement("button");
@@ -115,7 +102,7 @@
 //             recentMovies.setAttribute("value", newMovieArr[i]);
 //             recentMovies.textContent = newMovieArr[i];
 //             recentMovieEl.appendChild(recentMovies);
-            
+
 //         }
 //     }
 // };
@@ -139,13 +126,18 @@
 
 
 var popMovie = document.querySelector("#most-popular");
-var newReleases = document.querySelector("#new-releases")
+var newReleases = document.querySelector("#new-releases");
+var critAcclaimed = document.querySelector("#critically-acclaimed");
+var movieSearch = document.querySelector("#movie-search");
+var movieForm = document.querySelector("#movie-form");
 var mostPopularImg = document.querySelector("#most-popular-img");
+
 
 window.onload = function WindowLoad() {
     getMostPopular();
     getNewReleases();
-}
+    getCriticallyAcclaimed();
+};
 var getMostPopular = function()
 {
     var tmdbApiUrl = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=b5a9c03b27f6c897638c6e5f922cad8d"
@@ -156,7 +148,6 @@ var getMostPopular = function()
         {
             response.json().then(function(data)
             {
-                console.log(data);
                 displayMostPopular(data);
             });
         }
@@ -168,13 +159,34 @@ var displayMostPopular = function(data)
 {
     popMovie.innerHTML = "";
 
-    for (var i = 0; i < 5; i++)
-    {
-        var baseUrl = "https://image.tmdb.org/t/p/w300"
+    for (var i = 0; i < 5; i++) {
+        var baseUrl = "https://image.tmdb.org/t/p/w200"
+
+        var popLink = document.createElement("a");
+        popLink.setAttribute('href', 'movie-info.html?id=' + data.results[i].id)
+
+
         var popImg = document.createElement("img");
+        popImg.style.padding = "1px"
+        popImg.style.transition = "0.3s"
         popImg.src = baseUrl + data.results[i].poster_path;
-        popMovie.appendChild(popImg);
+
+        popLink.appendChild(popImg);
+        popMovie.appendChild(popLink);
+
+        // This handler will be executed every time the cursor is moved over a different list item
+        popImg.addEventListener("mouseover", function (event) {
+            // highlight the mouseover target
+            event.target.style.opacity = "0.5";
+            event.target.style.transition = "0.3s"
+
+            // reset the styles after a short delay
+            setTimeout(function () {
+                event.target.style.opacity = "";
+            }, 900);
+        }, false);
     }
+
 };
 
 var getNewReleases = function()
@@ -190,8 +202,6 @@ var getNewReleases = function()
             response.json().then(function(data)
             {
                 displayNewReleases(data);
-                console.log(data);
-
             });
         }
     });
@@ -200,11 +210,115 @@ var getNewReleases = function()
 
 var displayNewReleases = function(data)
 {
-    for (var i = 0; i < 5; i++)
+    for (var i = 1; i < 6; i++)
     {
-        var baseUrl = "https://image.tmdb.org/t/p/w300"
+        var baseUrl = "https://image.tmdb.org/t/p/w200"
+
+        var popLink = document.createElement("a");
+        popLink.setAttribute('href', 'movie-info.html?id=' + data.results[i].id)
+
         var newReleaseImg = document.createElement("img");
+        newReleaseImg.style.padding = "1px"
         newReleaseImg.src = baseUrl + data.results[i].poster_path;
         newReleases.appendChild(newReleaseImg);
+
+        popLink.appendChild(newReleaseImg);
+        newReleases.appendChild(popLink);
+
+        // This handler will be executed every time the cursor is moved over a different list item
+        newReleaseImg.addEventListener("mouseover", function (event) {
+            // highlight the mouseover target
+            event.target.style.opacity = "0.5";
+            event.target.style.transition = "0.3s"
+
+            // reset the styles after a short delay
+            setTimeout(function () {
+                event.target.style.opacity = "";
+            }, 900);
+        }, false);
     }
 };
+
+var getCriticallyAcclaimed = function()
+{
+    var tmdbApiUrl = "https://api.themoviedb.org/3/discover/movie?api_key=b5a9c03b27f6c897638c6e5f922cad8d&language=en-US&region=US&sort_by=vote_average.desc&include_adult=false&include_video=false&page=1&with_release_type=3&vote_count.gte=15000"
+
+    fetch(tmdbApiUrl).then(function(response)
+    {
+        if (response.ok)
+        {
+            response.json().then(function(data)
+            {
+                console.log(data);
+                displayCriticallyAcclaimed(data);
+            });
+        }
+    });
+};
+
+// As of right now to get an img to show you have to call the getMostPopular() in the console
+
+var displayCriticallyAcclaimed = function(data)
+{
+    
+
+    for (var i = 0; i < 5; i++)
+    {
+        var baseUrl = "https://image.tmdb.org/t/p/w200"
+
+        var popLink = document.createElement("a");
+        popLink.setAttribute('href', 'movie-info.html?id=' + data.results[i].id)
+
+        var critImg = document.createElement("img");
+        critImg.style.padding = "1px"
+        critImg.src = baseUrl + data.results[i].poster_path;
+        critAcclaimed.appendChild(critImg);
+
+        popLink.appendChild(critImg);
+        critAcclaimed.appendChild(popLink);
+
+        // This handler will be executed every time the cursor is moved over a different list item
+        critImg.addEventListener("mouseover", function (event) {
+            // highlight the mouseover target
+            event.target.style.opacity = "0.5";
+            event.target.style.transition = "0.3s"
+
+            // reset the styles after a short delay
+            setTimeout(function () {
+                event.target.style.opacity = "";
+            }, 900);
+        }, false);
+    }
+};
+
+var formHandler = function(event)
+{
+    event.preventDefault();
+
+    var movieName = movieSearch.value.trim();
+    if (movieName)
+    {
+        getMovie(movieName);
+        movieSearch.value = "";
+        console.log(movieName);
+    }
+};
+
+var getMovie = function(movie) 
+{
+    var tmdbApiUrl = "https://api.themoviedb.org/3/search/movie?api_key=b5a9c03b27f6c897638c6e5f922cad8d&language=en-US&query=" + movie + "&page=1&include_adult=false";
+
+    fetch(tmdbApiUrl).then(function(response)
+    {
+        if (response.ok)
+        {
+            response.json().then(function(data)
+            {
+                
+                console.log(data);
+            });
+        }
+    });
+};
+
+movieForm.addEventListener("submit", formHandler);
