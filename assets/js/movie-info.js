@@ -50,20 +50,36 @@ var displayMovieDetails = function (data) {
 
 };
 
-var getVideo = function () {
+// var getVideo = function () {
 
-    var youtubeApiUrl = "https://youtube.googleapis.com/youtube/v3/videos?list&key=" + key
+//     var youtubeApiUrl = "https://youtube.googleapis.com/youtube/v3/videos?part=contentDetails&chart=mostPopular&key=" + key
+//     fetch(youtubeApiUrl).then(function (response) {
+//         response.json().then(function (data) {
+//             console.log(data)
+
+//             movieVideo.src = data.items[0].id
+//         })
+//     })
+// }
+
+var getVideo = function () {
+    //make hard coded id dynamic
+    //dont forget to change api var after getting video working. this is still tmmbd api 
+    var youtubeApiUrl = "https://api.themoviedb.org/3/movie/682377?api_key=b5a9c03b27f6c897638c6e5f922cad8d&append_to_response=videos&language=en-US"
     fetch(youtubeApiUrl).then(function (response) {
         response.json().then(function (data) {
             console.log(data)
+            //pull the trailer off of youtube by the api movie key
+            movieVideo.src = "https://www.youtube.com/embed?v=" + data.videos.results[0].key
 
-            // movieVideo.src = "data:text" 
+            // movieVideo.style.backgroundImage = data.backdrop_path
         })
     })
 }
 
 
 window.onload = function WindowLoad() {
+    //function for when a movie is clicked on a different page it takes the user to a sepreate html
 
     //search for the URL 
     const queryString = window.location.search;
@@ -75,5 +91,5 @@ window.onload = function WindowLoad() {
     getMovieDetails(movieId);
    
 }
-
+// when functioning, call in display movie details
 getVideo()
