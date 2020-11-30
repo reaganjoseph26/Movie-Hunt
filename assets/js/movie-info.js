@@ -15,12 +15,6 @@ var getMovieDetails = function (id) {
             response.json().then(function (data) {
                 console.log(data);
                 displayMovieDetails(data)
-
-                // movieTitle.textContent =  data.original_title;
-                
-                // var movieImg = document.createElement("img")
-                // movieImg.src = data.poster_path
-                // moviePoster.appendChild(movieImg)
             });
         }
     });
@@ -62,17 +56,18 @@ var displayMovieDetails = function (data) {
 //     })
 // }
 
-var getVideo = function () {
+var getVideo = function (id) {
+
     //make hard coded id dynamic
     //dont forget to change api var after getting video working. this is still tmmbd api 
-    var youtubeApiUrl = "https://api.themoviedb.org/3/movie/682377?api_key=b5a9c03b27f6c897638c6e5f922cad8d&append_to_response=videos&language=en-US"
-    fetch(youtubeApiUrl).then(function (response) {
+    // var tmdbApiUrl = "https://api.themoviedb.org/3/movie/550?api_key=b5a9c03b27f6c897638c6e5f922cad8d&append_to_response=videos&language=en-US"
+    var tmdbApiUrl = "https://api.themoviedb.org/3/movie/" + id + "?api_key=b5a9c03b27f6c897638c6e5f922cad8d&append_to_response=videos&language=en-US"
+    fetch(tmdbApiUrl).then(function (response) {
         response.json().then(function (data) {
             console.log(data)
             //pull the trailer off of youtube by the api movie key
             movieVideo.src = "https://www.youtube.com/embed/" + data.videos.results[0].key
 
-            // movieVideo.style.backgroundImage = data.backdrop_path
         })
     })
 }
@@ -89,7 +84,7 @@ window.onload = function WindowLoad() {
     const movieId = urlParams.get('id');
     // display movie information by id 
     getMovieDetails(movieId);
+    getVideo(movieId)
    
 }
-// when functioning, call in display movie details
-getVideo()
+
