@@ -44,23 +44,8 @@ var displayMovieDetails = function (data) {
 
 };
 
-// var getVideo = function () {
-
-//     var youtubeApiUrl = "https://youtube.googleapis.com/youtube/v3/videos?part=contentDetails&chart=mostPopular&key=" + key
-//     fetch(youtubeApiUrl).then(function (response) {
-//         response.json().then(function (data) {
-//             console.log(data)
-
-//             movieVideo.src = data.items[0].id
-//         })
-//     })
-// }
-
 var getVideo = function (id) {
 
-    //make hard coded id dynamic
-    //dont forget to change api var after getting video working. this is still tmmbd api 
-    // var tmdbApiUrl = "https://api.themoviedb.org/3/movie/550?api_key=b5a9c03b27f6c897638c6e5f922cad8d&append_to_response=videos&language=en-US"
     var tmdbApiUrl = "https://api.themoviedb.org/3/movie/" + id + "?api_key=b5a9c03b27f6c897638c6e5f922cad8d&append_to_response=videos&language=en-US"
     fetch(tmdbApiUrl).then(function (response) {
         response.json().then(function (data) {
