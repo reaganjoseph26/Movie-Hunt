@@ -8,7 +8,7 @@ window.onload = function WindowLoad() {
 var getNewReleases = function(page)
 {
     var currDate = moment().format("YYYY-MM-DD");
-    var pastDate = moment().subtract(120, 'days')
+    var pastDate = moment().subtract(120, 'days');
 
     var tmdbApiUrl = "https://api.themoviedb.org/3/discover/movie?api_key=b5a9c03b27f6c897638c6e5f922cad8d&language=en-US&region=US&sort_by=primary_release_date.desc&include_adult=false&include_video=false&release_date.gte=" + pastDate + "&release_date.lte=" + currDate + "&with_release_type=3&page=" + page;
     // var tmdbApiUrl = "https://api.themoviedb.org/3/discover/movie?api_key=b5a9c03b27f6c897638c6e5f922cad8d&language=en-US&region=US&sort_by=primary_release_date.desc&include_adult=false&include_video=false&release_date.gte=2020-11-01&release_date.lte=2020-11-28&with_release_type=3&page=1";
