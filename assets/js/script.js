@@ -154,7 +154,9 @@ var getMostPopular = function()
     });
 };
 
-var displayMostPopular = function (data) {
+
+var displayMostPopular = function(data)
+{
     popMovie.innerHTML = "";
 
     for (var i = 0; i < 5; i++) {
