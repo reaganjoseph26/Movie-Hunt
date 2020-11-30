@@ -70,7 +70,7 @@ var getVideo = function () {
         response.json().then(function (data) {
             console.log(data)
             //pull the trailer off of youtube by the api movie key
-            movieVideo.src = "https://www.youtube.com/embed?v=" + data.videos.results[0].key
+            movieVideo.src = "https://www.youtube.com/embed/" + data.videos.results[0].key
 
             // movieVideo.style.backgroundImage = data.backdrop_path
         })
