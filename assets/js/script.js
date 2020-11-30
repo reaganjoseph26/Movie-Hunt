@@ -155,7 +155,9 @@ var getMostPopular = function()
     });
 };
 
-var displayMostPopular = function (data) {
+
+var displayMostPopular = function(data)
+{
     popMovie.innerHTML = "";
 
     for (var i = 0; i < 5; i++) {
@@ -216,13 +218,22 @@ var displayNewReleases = function(data)
         var popLink = document.createElement("a");
         popLink.setAttribute('href', 'movie-info.html?id=' + data.results[i].id)
 
+        // create img element to put poster into
         var newReleaseImg = document.createElement("img");
+        newReleaseImg.id = "new-release-img"
         newReleaseImg.style.padding = "1px"
         newReleaseImg.src = baseUrl + data.results[i].poster_path;
         newReleases.appendChild(newReleaseImg);
 
         popLink.appendChild(newReleaseImg);
         newReleases.appendChild(popLink);
+
+        // Create watch list button
+        var watchList = document.createElement("input");
+        watchList.id = "watch-list-btn";
+        watchList.setAttribute("type", "button");
+        watchList.textContent = "Watch List";
+        newReleaseImg.appendChild(watchList);
 
         // This handler will be executed every time the cursor is moved over a different list item
         newReleaseImg.addEventListener("mouseover", function (event) {
