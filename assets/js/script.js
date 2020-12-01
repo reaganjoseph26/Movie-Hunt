@@ -138,6 +138,7 @@ window.onload = function WindowLoad() {
     getNewReleases();
     getCriticallyAcclaimed();
 };
+
 var getMostPopular = function()
 {
     var tmdbApiUrl = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=b5a9c03b27f6c897638c6e5f922cad8d"
