@@ -174,6 +174,20 @@ var displayMostPopular = function(data)
         popLink.appendChild(popImg);
         popMovie.appendChild(popLink);
 
+        // Create span to put watch list btn
+        var watchList = document.createElement("span");
+        watchList.id = "btn-span";
+        watchList.className = "card-title"
+        popMovie.appendChild(watchList);
+        
+        // Create button for watch list
+        var watchListBtn = document.createElement("button");
+        watchListBtn.id = "watch-list-btn";
+        watchListBtn.className = "btn-floating halfway-fab waves-effect waves-light red";
+        watchListBtn.setAttribute("type", "button");
+        watchListBtn.textContent = "Watch";
+        watchList.appendChild(watchListBtn);
+
         // This handler will be executed every time the cursor is moved over a different list item
         popImg.addEventListener("mouseover", function (event) {
             // highlight the mouseover target
@@ -215,30 +229,39 @@ var displayNewReleases = function(data)
         var baseUrl = "https://image.tmdb.org/t/p/w200"
 
         var popLink = document.createElement("a");
-        popLink.setAttribute('href', 'movie-info.html?id=' + data.results[i].id)
+        popLink.setAttribute('href', 'movie-info.html?id=' + data.results[i].id);
 
         // create img element to put poster into
         var newReleaseImg = document.createElement("img");
-        newReleaseImg.id = "new-release-img"
-        newReleaseImg.style.padding = "1px"
+        newReleaseImg.id = "new-release-img";
+        newReleaseImg.style.padding = "1px";
         newReleaseImg.src = baseUrl + data.results[i].poster_path;
         newReleases.appendChild(newReleaseImg);
 
-        popLink.appendChild(newReleaseImg);
-        newReleases.appendChild(popLink);
+        popLink.append(newReleaseImg);
+        newReleases.append(popLink);
 
-        // Create watch list button
-        var watchList = document.createElement("input");
-        watchList.id = "watch-list-btn";
-        watchList.setAttribute("type", "button");
-        watchList.textContent = "Watch List";
-        newReleaseImg.appendChild(watchList);
+        // Create span to put watch list btn
+        var watchList = document.createElement("span");
+        watchList.id = "btn-span";
+        watchList.className = "card-title"
+        newReleases.appendChild(watchList);
+
+        // Create button for watch list
+        var watchListBtn = document.createElement("button");
+        watchListBtn.id = "watch-list-btn";
+        watchListBtn.className = "btn-floating halfway-fab waves-effect waves-light red";
+        watchListBtn.setAttribute("type", "button");
+        watchListBtn.textContent = "Watch";
+        watchList.appendChild(watchListBtn);
+
+
 
         // This handler will be executed every time the cursor is moved over a different list item
         newReleaseImg.addEventListener("mouseover", function (event) {
             // highlight the mouseover target
             event.target.style.opacity = "0.5";
-            event.target.style.transition = "0.3s"
+            event.target.style.transition = "0.3s";
 
             // reset the styles after a short delay
             setTimeout(function () {
@@ -285,6 +308,20 @@ var displayCriticallyAcclaimed = function(data)
 
         popLink.appendChild(critImg);
         critAcclaimed.appendChild(popLink);
+
+          // Create span to put watch list btn
+          var watchList = document.createElement("span");
+          watchList.id = "btn-span";
+          watchList.className = "card-title"
+          critAcclaimed.appendChild(watchList);
+          
+          // Create button for watch list
+          var watchListBtn = document.createElement("button");
+          watchListBtn.id = "watch-list-btn";
+          watchListBtn.className = "btn-floating halfway-fab waves-effect waves-light red";
+          watchListBtn.setAttribute("type", "button");
+          watchListBtn.textContent = "Watch";
+          watchList.appendChild(watchListBtn);
 
         // This handler will be executed every time the cursor is moved over a different list item
         critImg.addEventListener("mouseover", function (event) {

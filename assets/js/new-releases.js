@@ -49,6 +49,20 @@ var displayNewReleases = function(data)
         popLink.appendChild(newReleaseImg);
         newReleases.appendChild(popLink);
 
+         // Create span to put watch list btn
+         var watchList = document.createElement("span");
+         watchList.id = "btn-span";
+         watchList.className = "card-title"
+         newReleases.appendChild(watchList);
+         
+         // Create button for watch list
+         var watchListBtn = document.createElement("button");
+         watchListBtn.id = "watch-list-btn";
+         watchListBtn.className = "btn-floating halfway-fab waves-effect waves-light red";
+         watchListBtn.setAttribute("type", "button");
+         watchListBtn.textContent = "Watch";
+         watchList.appendChild(watchListBtn);
+
         // This handler will be executed every time the cursor is moved over a different list item
         newReleaseImg.addEventListener("mouseover", function (event) {
             // highlight the mouseover target

@@ -37,22 +37,15 @@ input {
     color: black;
 }
 
-
-
-   #new-release-img {
-       position: relative;
-   }
+#btn-span {
+    position:relative;
+    display:inline-block;
    
-   /* Style the button and place it in the middle of the container/image */
-    #watch-list-btn {
-        position: absolute;
-        bottom:50%;
-        right:50%;
-        width:100px;
-        height:30px;
-    margin:0px -50px -15px 0px;
-    }
+}
 
-   #new-releases #watch-list-btn:hover { 
-    background-color: black;
-   }
+#watch-list-btn {
+    position:absolute;
+    bottom:50%;
+    right:50%;
+    margin: 0 5px 5px 0;
+}
