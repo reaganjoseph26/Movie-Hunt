@@ -3,7 +3,8 @@
 var movieTitle = document.querySelector("h1")
 var moviePoster = document.querySelector("#movie-poster")
 var movieSum = document.querySelector("#movie-summary")
-var movieCredits = document.querySelector("#credits")
+var movieCast = document.querySelector("#cast")
+var movieCrew = document.querySelector("#crew")
 var movieReleaseDate = document.querySelector("#release-date")
 var pageTitle = document.querySelector("title")
 // var key = config.myKey
@@ -38,10 +39,7 @@ var displayMovieDetails = function (data) {
     moviePoster.appendChild(movieImg)
 
     //change the content of the p element in html to display plot previews
-    movieSum.textContent = data.overview
-
-    //change the content of specific p element to display cast and crew of movies 
-    // movieCredits.textContent = data.
+    movieSum.textContent = "Plot overview: " + data.overview
 
     // change textContent of seconds p elemment to display the release date 
     movieReleaseDate.textContent = "Released: " + data.release_date
@@ -58,6 +56,14 @@ var getVideo = function (id) {
             //pull the trailer off of youtube by the api movie key
             movieVideo.src = "https://www.youtube.com/embed/" + data.videos.results[0].key
 
+            // //change the content of specific p element to display cast and crew of movies
+            //I have to create a for loop to display all name while keeping code DRY
+            for(i = 0; i < data.credits.cast.length && i < data.credits.crew.length ; i ++) {
+                //change the content of specific p element to display cast and crew of movies 
+            movieCast.textContent += data.credits.cast[i].original_name + ", "
+            movieCrew.textContent += data.credits.crew[i].original_name + ", "
+            }
+        
         })
     })
 }
