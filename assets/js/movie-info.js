@@ -1,11 +1,11 @@
-
-// var testId = 682377;
-var movieTitle = document.querySelector("h1");
-var moviePoster = document.querySelector("#movie-poster");
-var movieSum = document.querySelector("#movie-summary");
-var movieReleaseDate = document.querySelector("#release-date");
-var pageTitle = document.querySelector("title");
-var movieVideo = document.querySelector("#movie-trailer");
+var movieTitle = document.querySelector("h1")
+var moviePoster = document.querySelector("#movie-poster")
+var movieSum = document.querySelector("#movie-summary")
+var movieCast = document.querySelector("#cast")
+var movieCrew = document.querySelector("#crew")
+var movieReleaseDate = document.querySelector("#release-date")
+var pageTitle = document.querySelector("title")
+var movieVideo = document.querySelector("#movie-trailer")
 
 var getMovieDetails = function (id) {
     var tmdbApiUrl = "https://api.themoviedb.org/3/movie/" + id + "?api_key=a01b6212f3bbba093d5cbc6d345df704&language=en-US"
@@ -36,7 +36,7 @@ var displayMovieDetails = function (data) {
     moviePoster.appendChild(movieImg)
 
     //change the content of the p element in html to display plot previews
-    movieSum.textContent = data.overview
+    movieSum.textContent = "Plot overview: " + data.overview
 
     // change textContent of seconds p elemment to display the release date 
     movieReleaseDate.textContent = "Released: " + data.release_date
@@ -45,13 +45,22 @@ var displayMovieDetails = function (data) {
 
 var getVideo = function (id) {
 
-    var tmdbApiUrl = "https://api.themoviedb.org/3/movie/" + id + "?api_key=b5a9c03b27f6c897638c6e5f922cad8d&append_to_response=videos&language=en-US"
+    var tmdbApiUrl = "https://api.themoviedb.org/3/movie/" + id + "?api_key=b5a9c03b27f6c897638c6e5f922cad8d&append_to_response=videos,credits&language=en-US"
     fetch(tmdbApiUrl).then(function (response) {
         response.json().then(function (data) {
             console.log(data)
+            
             //pull the trailer off of youtube by the api movie key
             movieVideo.src = "https://www.youtube.com/embed/" + data.videos.results[0].key
 
+            // //change the content of specific p element to display cast and crew of movies
+            //I have to create a for loop to display all name while keeping code DRY
+            for(i = 0; i < data.credits.cast.length && i < data.credits.crew.length ; i ++) {
+                //change the content of specific p element to display cast and crew of movies 
+            movieCast.textContent += data.credits.cast[i].original_name + ", "
+            movieCrew.textContent += data.credits.crew[i].original_name + ", "
+            }
+        
         })
     })
 }

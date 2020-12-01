@@ -24,6 +24,10 @@ var displayMostPopular = function (data) {
     popMovie.innerHTML = "";
 
     for (var i = 0; i < 20; i++) {
+        if(!data.results[i].poster_path) {
+            continue;
+         }
+         
         var baseUrl = "https://image.tmdb.org/t/p/w200"
 
         var popLink = document.createElement("a");
