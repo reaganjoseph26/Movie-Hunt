@@ -161,6 +161,11 @@ var displayMostPopular = function(data)
     popMovie.innerHTML = "";
 
     for (var i = 0; i < 5; i++) {
+
+        if(!data.results[i].poster_path) {
+            continue;
+         }
+
         var baseUrl = "https://image.tmdb.org/t/p/w200"
 
         var popLink = document.createElement("a");
@@ -213,6 +218,10 @@ var displayNewReleases = function(data)
 {
     for (var i = 1; i < 6; i++)
     {
+        if(!data.results[i].poster_path) {
+            continue;
+         }
+
         var baseUrl = "https://image.tmdb.org/t/p/w200"
 
         var popLink = document.createElement("a");
@@ -274,6 +283,10 @@ var displayCriticallyAcclaimed = function(data)
 
     for (var i = 0; i < 5; i++)
     {
+        if(!data.results[i].poster_path) {
+            continue;
+         }
+         
         var baseUrl = "https://image.tmdb.org/t/p/w200"
 
         var popLink = document.createElement("a");

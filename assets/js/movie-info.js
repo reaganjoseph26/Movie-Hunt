@@ -3,9 +3,10 @@
 var movieTitle = document.querySelector("h1")
 var moviePoster = document.querySelector("#movie-poster")
 var movieSum = document.querySelector("#movie-summary")
+var movieCredits = document.querySelector("#credits")
 var movieReleaseDate = document.querySelector("#release-date")
 var pageTitle = document.querySelector("title")
-var key = config.myKey
+// var key = config.myKey
 var movieVideo = document.querySelector("#movie-trailer")
 
 var getMovieDetails = function (id) {
@@ -39,6 +40,9 @@ var displayMovieDetails = function (data) {
     //change the content of the p element in html to display plot previews
     movieSum.textContent = data.overview
 
+    //change the content of specific p element to display cast and crew of movies 
+    // movieCredits.textContent = data.
+
     // change textContent of seconds p elemment to display the release date 
     movieReleaseDate.textContent = "Released: " + data.release_date
 
@@ -46,10 +50,11 @@ var displayMovieDetails = function (data) {
 
 var getVideo = function (id) {
 
-    var tmdbApiUrl = "https://api.themoviedb.org/3/movie/" + id + "?api_key=b5a9c03b27f6c897638c6e5f922cad8d&append_to_response=videos&language=en-US"
+    var tmdbApiUrl = "https://api.themoviedb.org/3/movie/" + id + "?api_key=b5a9c03b27f6c897638c6e5f922cad8d&append_to_response=videos,credits&language=en-US"
     fetch(tmdbApiUrl).then(function (response) {
         response.json().then(function (data) {
             console.log(data)
+            
             //pull the trailer off of youtube by the api movie key
             movieVideo.src = "https://www.youtube.com/embed/" + data.videos.results[0].key
 

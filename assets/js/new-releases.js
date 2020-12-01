@@ -33,6 +33,10 @@ var displayNewReleases = function(data)
 
     for (var i = 0; i < 20; i++)
     {
+         //create an if else statment that doesnt display movies with posters value at null 
+        if(!data.results[i].poster_path) {
+            continue;
+         }
         
         var baseUrl = "https://image.tmdb.org/t/p/w200";
 
@@ -43,14 +47,7 @@ var displayNewReleases = function(data)
         newReleaseImg.style.padding = "1px";
         newReleaseImg.src = baseUrl + data.results[i].poster_path
 
-        //create an if else statment that doesnt display movies with posters value at null 
-        if(newReleaseImg.src === "null") {
-            newReleasesImg.style.display = "none";
-        } else {
-            newReleases.appendChild(newReleaseImg);
-        }
-        // newReleases.appendChild(newReleaseImg);
-        
+        newReleases.appendChild(newReleaseImg);
         popLink.appendChild(newReleaseImg);
         newReleases.appendChild(popLink);
 

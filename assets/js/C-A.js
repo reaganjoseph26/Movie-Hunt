@@ -23,9 +23,15 @@ var getCa= function (page) {
 // As of right now to get an img to show you have to call the getMostPopular() in the console
 
 var displayCa = function (data) {
+
     criticallyAcclaimedMovie.innerHTML = "";
 
     for (var i = 0; i < 20; i++) {
+
+        if(!data.results[i].poster_path) {
+            continue;
+         }
+         
         var baseUrl = "https://image.tmdb.org/t/p/w200"
 
         var popLink = document.createElement("a");
