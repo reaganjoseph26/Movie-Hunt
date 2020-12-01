@@ -160,12 +160,15 @@ var displayMostPopular = function(data)
 {
     popMovie.innerHTML = "";
 
+
+    console.log(data);
     for (var i = 0; i < 5; i++) {
         var baseUrl = "https://image.tmdb.org/t/p/w200"
 
-        var popLink = document.createElement("a");
-        popLink.setAttribute('href', 'movie-info.html?id=' + data.results[i].id)
+        
 
+        var popLink = document.createElement("a");
+        popLink.setAttribute('href', 'movie-info.html?id=' + data.results[i].id);
 
         var popImg = document.createElement("img");
         popImg.style.padding = "1px"
@@ -183,11 +186,18 @@ var displayMostPopular = function(data)
         
         // Create button for watch list
         var watchListBtn = document.createElement("button");
-        watchListBtn.id = "watch-list-btn";
+        watchListBtn.id = "watch-list-btn" + data.results[i].id;
         watchListBtn.className = "btn-floating halfway-fab waves-effect waves-light red";
         watchListBtn.setAttribute("type", "button");
+        watchListBtn.setAttribute("value", i);
         watchListBtn.textContent = "Watch";
         watchList.appendChild(watchListBtn);
+
+        $('#watch-list-btn' + data.results[i].id).on('click', function(event)
+        {
+            localStorage.setItem(data.results[event.target.value].title, JSON.stringify(data.results[event.target.value]));
+            
+        })
 
         // This handler will be executed every time the cursor is moved over a different list item
         popImg.addEventListener("mouseover", function (event) {
@@ -324,6 +334,8 @@ var displayCriticallyAcclaimed = function(data)
           watchListBtn.textContent = "Watch";
           watchList.appendChild(watchListBtn);
 
+          $('')
+
         // This handler will be executed every time the cursor is moved over a different list item
         critImg.addEventListener("mouseover", function (event) {
             // highlight the mouseover target
@@ -337,6 +349,8 @@ var displayCriticallyAcclaimed = function(data)
         }, false);
     }
 };
+
+
 
 var formHandler = function(event)
 {
@@ -367,5 +381,8 @@ var getMovie = function(movie)
         }
     });
 };
+
+
+
 
 movieForm.addEventListener("submit", formHandler);

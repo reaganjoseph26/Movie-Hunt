@@ -57,11 +57,18 @@ var displayNewReleases = function(data)
          
          // Create button for watch list
          var watchListBtn = document.createElement("button");
-         watchListBtn.id = "watch-list-btn";
+         watchListBtn.id = "watch-list-btn" + data.results[i].id;
          watchListBtn.className = "btn-floating halfway-fab waves-effect waves-light red";
          watchListBtn.setAttribute("type", "button");
+         watchListBtn.setAttribute("value", i);
          watchListBtn.textContent = "Watch";
          watchList.appendChild(watchListBtn);
+
+         $('#watch-list-btn' + data.results[i].id).on('click', function(event)
+        {
+            localStorage.setItem(data.results[event.target.value].title, JSON.stringify(data.results[event.target.value]));
+            
+        });
 
         // This handler will be executed every time the cursor is moved over a different list item
         newReleaseImg.addEventListener("mouseover", function (event) {

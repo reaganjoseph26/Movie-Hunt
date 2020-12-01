@@ -5,7 +5,6 @@ var moviePoster = document.querySelector("#movie-poster")
 var movieSum = document.querySelector("#movie-summary")
 var movieReleaseDate = document.querySelector("#release-date")
 var pageTitle = document.querySelector("title")
-var key = config.myKey
 var movieVideo = document.querySelector("#movie-trailer")
 
 var getMovieDetails = function (id) {
