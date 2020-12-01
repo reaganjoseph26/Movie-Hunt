@@ -1,12 +1,11 @@
 
 // var testId = 682377;
-var movieTitle = document.querySelector("h1")
-var moviePoster = document.querySelector("#movie-poster")
-var movieSum = document.querySelector("#movie-summary")
-var movieReleaseDate = document.querySelector("#release-date")
-var pageTitle = document.querySelector("title")
-var key = config.myKey
-var movieVideo = document.querySelector("#movie-trailer")
+var movieTitle = document.querySelector("h1");
+var moviePoster = document.querySelector("#movie-poster");
+var movieSum = document.querySelector("#movie-summary");
+var movieReleaseDate = document.querySelector("#release-date");
+var pageTitle = document.querySelector("title");
+var movieVideo = document.querySelector("#movie-trailer");
 
 var getMovieDetails = function (id) {
     var tmdbApiUrl = "https://api.themoviedb.org/3/movie/" + id + "?api_key=a01b6212f3bbba093d5cbc6d345df704&language=en-US"
