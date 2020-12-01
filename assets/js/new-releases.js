@@ -17,8 +17,8 @@ var getNewReleases = function(page)
     {
         if (response.ok)
         {
-            response.json().then(function(data)
-            {
+            response.json().then(function(data) {
+                console.log(data)
                 displayNewReleases(data);
             });
         }
@@ -37,15 +37,20 @@ var displayNewReleases = function(data)
         var baseUrl = "https://image.tmdb.org/t/p/w200";
 
         var popLink = document.createElement("a");
-        console.log(data.results[i].title);
-        console.log(data.results[i].id);
         popLink.setAttribute('href', 'movie-info.html?id=' + data.results[i].id);
 
         var newReleaseImg = document.createElement("img");
         newReleaseImg.style.padding = "1px";
-        newReleaseImg.src = baseUrl + data.results[i].poster_path;
-        newReleases.appendChild(newReleaseImg);
+        newReleaseImg.src = baseUrl + data.results[i].poster_path
 
+        //create an if else statment that doesnt display movies with posters value at null 
+        if(newReleaseImg.src === "null") {
+            newReleasesImg.style.display = "none";
+        } else {
+            newReleases.appendChild(newReleaseImg);
+        }
+        // newReleases.appendChild(newReleaseImg);
+        
         popLink.appendChild(newReleaseImg);
         newReleases.appendChild(popLink);
 
