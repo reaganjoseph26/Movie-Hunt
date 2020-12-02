@@ -83,27 +83,14 @@ var getVideo = function (id) {
     fetch(tmdbApiUrl).then(function (response) {
         response.json().then(function (data) {
             console.log(data)
-            
-            //if that specific movie does not have a videos key than do not display iframe
-            // if(!data.videos.results[0].key) {
-            //     movieVideo.style.display = "none"
-                
-            // } 
-                 //pull the trailer off of youtube by the api movie key
+
+            //pull the trailer off of youtube by the api movie key
+             //if that specific movie does not have a videos key than do not display iframe
+            if(data.videos.results.key) {
                 movieVideo.src = "https://www.youtube.com/embed/" + data.videos.results[0].key
-                
-             
-                
-                //create a condition statament that changes innerHTML if cast and crew is not 
-                // if(!data.credits.cast || data.credits.crew) {
-                //     continue;
-        
-                // } else {
-                //     movieCast.textContent += data.credits.cast[i].original_name + ", "
-                //     movieCrew.textContent += data.credits.crew[i].original_name + ", "
-                // }
-                
-            
+            } else {
+                movieVideo.style.display = "none"
+            }
         })
     })
 }
