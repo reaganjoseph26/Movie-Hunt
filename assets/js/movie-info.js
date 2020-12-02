@@ -8,7 +8,7 @@ var pageTitle = document.querySelector("title")
 var movieVideo = document.querySelector("#movie-trailer")
 
 var getMovieDetails = function (id) {
-    var tmdbApiUrl = "https://api.themoviedb.org/3/movie/" + id + "?api_key=a01b6212f3bbba093d5cbc6d345df704&language=en-US"
+    var tmdbApiUrl = "https://api.themoviedb.org/3/movie/" + id + "?api_key=a01b6212f3bbba093d5cbc6d345df704&append_to_response=credits&language=en-US"
     fetch(tmdbApiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
@@ -41,30 +41,36 @@ var displayMovieDetails = function (data) {
     // change textContent of seconds p elemment to display the release date 
     movieReleaseDate.textContent = "Released: " + data.release_date
 
+    //change the content of specific p element to display cast and crew of movies
+    for(i = 0; i < data.credits.cast.length; i ++) {
+
+        movieCast.textContent += data.credits.cast[i].original_name + ", "
+     };
+
+     for(i = 0; i < data.credits.crew.length; i ++) {
+        movieCrew.textContent += data.credits.crew[i].original_name + ", "
+     }
+
 
 };
 
 var getVideo = function (id) {
 
-    var tmdbApiUrl = "https://api.themoviedb.org/3/movie/" + id + "?api_key=b5a9c03b27f6c897638c6e5f922cad8d&append_to_response=videos,credits&language=en-US"
+    var tmdbApiUrl = "https://api.themoviedb.org/3/movie/" + id + "?api_key=b5a9c03b27f6c897638c6e5f922cad8d&append_to_response=videos&language=en-US"
     fetch(tmdbApiUrl).then(function (response) {
         response.json().then(function (data) {
             console.log(data)
             
             //if that specific movie does not have a videos key than do not display iframe
-            if(!data.videos.results[0].key) {
-                movieVideo.style.display = "none"
+            // if(!data.videos.results[0].key) {
+            //     movieVideo.style.display = "none"
                 
-            } 
+            // } 
                  //pull the trailer off of youtube by the api movie key
                 movieVideo.src = "https://www.youtube.com/embed/" + data.videos.results[0].key
                 
-                //change the content of specific p element to display cast and crew of movies
-                // I have to create a for loop to display all name while keeping code DRY
-             for(i = 0; i < data.credits.cast[i].length && i < data.credits.crew[i].length; i ++) {
-
-                movieCast.textContent += data.credits.cast[i].original_name + ", "
-                movieCrew.textContent += data.credits.crew[i].original_name + ", "
+             
+                
                 //create a condition statament that changes innerHTML if cast and crew is not 
                 // if(!data.credits.cast || data.credits.crew) {
                 //     continue;
@@ -73,10 +79,8 @@ var getVideo = function (id) {
                 //     movieCast.textContent += data.credits.cast[i].original_name + ", "
                 //     movieCrew.textContent += data.credits.crew[i].original_name + ", "
                 // }
-                //change the content of specific p element to display cast and crew of movies 
-                // movieCast.textContent += data.credits.cast[i].original_name + ", "
-                // movieCrew.textContent += data.credits.crew[i].original_name + ", "
-            };
+                
+            
         })
     })
 }
