@@ -12,7 +12,9 @@
  }
 nav ul a  {
     font-size: 20px;
- 
+}
+#current a {
+    color: red;
 }
 
 nav ul a:hover {
