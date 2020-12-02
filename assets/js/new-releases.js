@@ -34,6 +34,7 @@ var displayNewReleases = function(data)
     for (var i = 0; i < 20; i++)
     {
          //create an if else statment that doesnt display movies with posters value at null 
+         //if movie poster gives a falsey response then continue to next movie 
         if(!data.results[i].poster_path) {
             continue;
          }
@@ -117,10 +118,3 @@ var displayNewReleases = function(data)
     
     movieForm.addEventListener("submit", formHandler);
     
-
-// var pagination = function() {
-//     console.log()
-//     // var popularpageTwo = document.createElement("div")
-// }
-
-// pagination()

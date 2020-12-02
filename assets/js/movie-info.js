@@ -41,6 +41,7 @@ var displayMovieDetails = function (data) {
     // change textContent of seconds p elemment to display the release date 
     movieReleaseDate.textContent = "Released: " + data.release_date
 
+
 };
 
 var getVideo = function (id) {
@@ -50,17 +51,32 @@ var getVideo = function (id) {
         response.json().then(function (data) {
             console.log(data)
             
-            //pull the trailer off of youtube by the api movie key
-            movieVideo.src = "https://www.youtube.com/embed/" + data.videos.results[0].key
+            //if that specific movie does not have a videos key than do not display iframe
+            if(!data.videos.results[0].key) {
+                movieVideo.style.display = "none"
+                
+            } 
+                 //pull the trailer off of youtube by the api movie key
+                movieVideo.src = "https://www.youtube.com/embed/" + data.videos.results[0].key
+                
+                //change the content of specific p element to display cast and crew of movies
+                // I have to create a for loop to display all name while keeping code DRY
+             for(i = 0; i < data.credits.cast[i].length && i < data.credits.crew[i].length; i ++) {
 
-            // //change the content of specific p element to display cast and crew of movies
-            //I have to create a for loop to display all name while keeping code DRY
-            for(i = 0; i < data.credits.cast.length && i < data.credits.crew.length ; i ++) {
-                //change the content of specific p element to display cast and crew of movies 
-            movieCast.textContent += data.credits.cast[i].original_name + ", "
-            movieCrew.textContent += data.credits.crew[i].original_name + ", "
-            }
+                movieCast.textContent += data.credits.cast[i].original_name + ", "
+                movieCrew.textContent += data.credits.crew[i].original_name + ", "
+                //create a condition statament that changes innerHTML if cast and crew is not 
+                // if(!data.credits.cast || data.credits.crew) {
+                //     continue;
         
+                // } else {
+                //     movieCast.textContent += data.credits.cast[i].original_name + ", "
+                //     movieCrew.textContent += data.credits.crew[i].original_name + ", "
+                // }
+                //change the content of specific p element to display cast and crew of movies 
+                // movieCast.textContent += data.credits.cast[i].original_name + ", "
+                // movieCrew.textContent += data.credits.crew[i].original_name + ", "
+            };
         })
     })
 }
