@@ -43,9 +43,6 @@ input {
    
 }
 
-#watch-list-btn {
-    position:absolute;
-    bottom:50%;
-    right:50%;
-    margin: 0 5px 5px 0;
+.watch-btn {
+    margin-bottom: 22px;
 }

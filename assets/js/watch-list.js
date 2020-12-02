@@ -22,7 +22,7 @@ var displayWatchList = function ()
 
     for (var i = 0; i < savedMovie.length; i++) 
     {
-        var baseUrl = "https://image.tmdb.org/t/p/w200"
+        var baseUrl = "https://image.tmdb.org/t/p/w200";
 
         var loadMovie = JSON.parse(savedMovie[i]);
 
@@ -41,13 +41,13 @@ var displayWatchList = function ()
          // Create span to put watch list btn
          var watchList = document.createElement("span");
          watchList.id = "btn-span";
-         watchList.className = "card-title"
-         savedImg.appendChild(watchList);
+         watchList.className = "card-title";
+         watchListEl.appendChild(watchList);
          
          // Create button for watch list
          var watchListBtn = document.createElement("button");
          watchListBtn.id = "watch-list-btn" + savedMovie[i].id;
-         watchListBtn.className = "btn-floating halfway-fab waves-effect waves-light red";
+         watchListBtn.className = "watch-btn btn-floating halfway-fab waves-effect waves-light red";
          watchListBtn.setAttribute("type", "button");
          watchListBtn.setAttribute("value", i);
          watchListBtn.textContent = "Watch";
@@ -58,7 +58,7 @@ var displayWatchList = function ()
         {
             // highlight the mouseover target
             event.target.style.opacity = "0.5";
-            event.target.style.transition = "0.3s"
+            event.target.style.transition = "0.3s";
 
             // reset the styles after a short delay
             setTimeout(function () 

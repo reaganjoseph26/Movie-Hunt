@@ -49,12 +49,13 @@ var displayCa = function (data) {
          // Create button for watch list
          var watchListBtn = document.createElement("button");
          watchListBtn.id = "watch-list-btn" + data.results[i].id;
-         watchListBtn.className = "btn-floating halfway-fab waves-effect waves-light red";
+         watchListBtn.className = "watch-btn btn-floating halfway-fab waves-effect waves-light red";
          watchListBtn.setAttribute("type", "button");
          watchListBtn.setAttribute("value", i);
          watchListBtn.textContent = "Watch";
          watchList.appendChild(watchListBtn);
 
+        // on click the button savees to local storage
          $('#watch-list-btn' + data.results[i].id).on('click', function(event)
         {
             localStorage.setItem(data.results[event.target.value].title, JSON.stringify(data.results[event.target.value]));
