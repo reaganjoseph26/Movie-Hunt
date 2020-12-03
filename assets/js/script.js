@@ -364,32 +364,13 @@ var formHandler = function(event)
     var movieName = movieSearch.value.trim();
     if (movieName)
     {
-        getMovie(movieName);
-        movieSearch.value = "";
+        window.location.href = "search-results.html?movie-name=" + movieName
+
+
         console.log(movieName);
     }
 };
 
-var getMovie = function(movie) 
-{
-    var tmdbApiUrl = "https://api.themoviedb.org/3/search/movie?api_key=b5a9c03b27f6c897638c6e5f922cad8d&language=en-US&query=" + movie + "&page=1&include_adult=false";
+movieForm.addEventListener("submit", formHandler)
 
-    fetch(tmdbApiUrl).then(function(response)
-    {
-        if (response.ok)
-        {
-            response.json().then(function(data)
-            {
-                
-                console.log(data);
-            });
-        }
-    });
-};
-
-movieForm.addEventListener("submit", function () {
-    formHandler
-    movieSearch.window.location.href="search-results.html"
-    // window.location.href="search-results.html"
-} ) 
 
