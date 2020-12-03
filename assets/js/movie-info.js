@@ -86,7 +86,7 @@ var getVideo = function (id) {
 
             //pull the trailer off of youtube by the api movie key
              //if that specific movie does not have a videos key than do not display iframe
-            if(data.videos.results.key) {
+            if(data.videos.results.length > 0 ) {
                 movieVideo.src = "https://www.youtube.com/embed/" + data.videos.results[0].key
             } else {
                 movieVideo.style.display = "none"
