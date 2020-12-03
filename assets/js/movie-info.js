@@ -6,6 +6,8 @@ var pageTitle = document.querySelector("title")
 var movieVideo = document.querySelector("#movie-trailer")
 var movieCast = document.querySelector("#movie-cast")
 var movieCrew = document.querySelector("#movie-crew")
+var movieSearch = document.querySelector("#movie-search");
+var movieForm = document.querySelector("#movie-form");
 
 var getMovieDetails = function (id) {
     var tmdbApiUrl = "https://api.themoviedb.org/3/movie/" + id + "?api_key=a01b6212f3bbba093d5cbc6d345df704&append_to_response=credits&language=en-US"
@@ -110,4 +112,21 @@ window.onload = function WindowLoad() {
     getVideo(movieId)
    
 }
+
+var formHandler = function(event)
+{
+    event.preventDefault();
+
+    var movieName = movieSearch.value.trim();
+    if (movieName)
+    {
+        window.location.href = "search-results.html?movie-name=" + movieName
+
+
+        console.log(movieName);
+    }
+};
+
+movieForm.addEventListener("submit", formHandler)
+
 
