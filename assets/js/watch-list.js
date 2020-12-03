@@ -47,11 +47,17 @@ var displayWatchList = function ()
          // Create button for watch list
          var watchListBtn = document.createElement("button");
          watchListBtn.id = "watch-list-btn" + savedMovie[i].id;
-         watchListBtn.className = "watch-btn btn-floating halfway-fab waves-effect waves-light red";
+         watchListBtn.className = "remove-btn btn-floating halfway-fab waves-effect waves-light red small material-icons";
          watchListBtn.setAttribute("type", "button");
          watchListBtn.setAttribute("value", i);
-         watchListBtn.textContent = "Watch";
+         watchListBtn.textContent = "remove";
          watchList.appendChild(watchListBtn);
+
+         $('#watch-list-btn' + savedMovie[i].id).on('click', function(event)
+         {
+             localStorage.removeItem(savedMovie[i].id);
+
+         });
 
         // This handler will be executed every time the cursor is moved over a different list item
         watchListEl.addEventListener("mouseover", function (event) 
@@ -67,7 +73,6 @@ var displayWatchList = function ()
             }, 900);
         }, false);
     }
-
 };
 
 

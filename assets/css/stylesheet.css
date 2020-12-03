@@ -43,6 +43,6 @@ input {
    
 }
 
-.watch-btn {
+.watch-btn, .remove-btn {
     margin-bottom: 22px;
 }

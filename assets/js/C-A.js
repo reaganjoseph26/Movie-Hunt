@@ -49,18 +49,40 @@ var displayCa = function (data) {
          // Create button for watch list
          var watchListBtn = document.createElement("button");
          watchListBtn.id = "watch-list-btn" + data.results[i].id;
-         watchListBtn.className = "watch-btn btn-floating halfway-fab waves-effect waves-light red";
+         watchListBtn.className = "watch-btn btn-floating halfway-fab waves-effect waves-light red small material-icons";
          watchListBtn.setAttribute("type", "button");
          watchListBtn.setAttribute("value", i);
-         watchListBtn.textContent = "Watch";
+         watchListBtn.textContent = "add";
          watchList.appendChild(watchListBtn);
 
         // on click the button savees to local storage
-         $('#watch-list-btn' + data.results[i].id).on('click', function(event)
+        $('#watch-list-btn' + data.results[i].id).on('click', function(event)
         {
-            localStorage.setItem(data.results[event.target.value].title, JSON.stringify(data.results[event.target.value]));
+            var $this = $(this);
+            if ($this.hasClass('watch-btn'))
+            {
+                localStorage.setItem(data.results[event.target.value].title, JSON.stringify(data.results[event.target.value]));
+
+            }
+            else if ($this.hasClass('remove-btn'))
+            {
+                localStorage.removeItem(data.results[event.target.value].title, JSON.stringify(data.results[event.target.value]));
+            }
+
+            $this.toggleClass('watch-btn');
+
+            if ($this.hasClass('watch-btn'))
+            {
+                $this.text('add');
+                
+            }
+            else
+            {
+                $this.addClass('remove-btn small material-icons');
+                $this.text('remove');
+            }
             
-        })
+        });
 
         
 
