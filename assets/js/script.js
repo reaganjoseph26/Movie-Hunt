@@ -177,9 +177,9 @@ var displayMostPopular = function(data)
         popImg.style.transition = "0.3s"
         popImg.src = baseUrl + data.results[i].poster_path;
 
-        var testCard = document.querySelector("#most-popular-title") //
-        // testCard.style = "background-color: white; color: balck"; //
-        testCard.textContent = data.results[i].original_title //
+        // var testCard = document.querySelector("#most-popular-title") //
+        // // testCard.style = "background-color: white; color: balck"; //
+        // testCard.textContent = data.results[i].original_title //
         
     
 
