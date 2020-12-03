@@ -177,14 +177,20 @@ var displayMostPopular = function(data)
         popImg.style.transition = "0.3s"
         popImg.src = baseUrl + data.results[i].poster_path;
 
+        var testCard = document.querySelector("#most-popular-title") //
+        // testCard.style = "background-color: white; color: balck"; //
+        testCard.textContent = data.results[i].original_title //
+        
+    
+
         popLink.appendChild(popImg);
         popMovie.appendChild(popLink);
-
+     
         // Create span to put watch list btn
         var watchList = document.createElement("span");
         watchList.id = "btn-span";
         watchList.className = "card-title"
-        popMovie.appendChild(watchList);
+        popMovie.appendChild(watchList); 
         
         // Create button for watch list
         var watchListBtn = document.createElement("button");
@@ -381,4 +387,9 @@ var getMovie = function(movie)
     });
 };
 
-movieForm.addEventListener("submit", formHandler);
+movieForm.addEventListener("submit", function () {
+    formHandler
+    movieSearch.window.location.href="search-results.html"
+    // window.location.href="search-results.html"
+} ) 
+
