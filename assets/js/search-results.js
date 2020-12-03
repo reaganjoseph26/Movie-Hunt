@@ -1,4 +1,6 @@
 var popMovie = document.querySelector("#search-results");
+var movieSearch = document.querySelector("#movie-search");
+var movieForm = document.querySelector("#movie-form");
 
 //search for the URL 
     const queryString = window.location.search;
@@ -88,6 +90,22 @@ $(".page-btn").on("click", function () {
     getMovie($(this).text());
     console.log($(this).text());
 })
+
+var formHandler = function(event)
+{
+    event.preventDefault();
+
+    var movieName = movieSearch.value.trim();
+    if (movieName)
+    {
+        window.location.href = "search-results.html?movie-name=" + movieName
+
+
+        console.log(movieName);
+    }
+};
+
+movieForm.addEventListener("submit", formHandler)
 
 
  
