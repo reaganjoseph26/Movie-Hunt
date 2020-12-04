@@ -137,6 +137,7 @@ window.onload = function WindowLoad() {
     getMostPopular();
     getNewReleases();
     getCriticallyAcclaimed();
+    // btnRefresh();
 };
 
 var getMostPopular = function()
@@ -155,11 +156,16 @@ var getMostPopular = function()
     });
 };
 
-
+// // var btnRefresh = function()
+// // {
+    
+// }
 var displayMostPopular = function(data)
 {
     popMovie.innerHTML = "";
 
+
+    console.log(data);
     for (var i = 0; i < 5; i++) {
 
         if(!data.results[i].poster_path) {
@@ -168,9 +174,10 @@ var displayMostPopular = function(data)
 
         var baseUrl = "https://image.tmdb.org/t/p/w200"
 
-        var popLink = document.createElement("a");
-        popLink.setAttribute('href', 'movie-info.html?id=' + data.results[i].id)
+        
 
+        var popLink = document.createElement("a");
+        popLink.setAttribute('href', 'movie-info.html?id=' + data.results[i].id);
 
         var popImg = document.createElement("img");
         popImg.style.padding = "1px"
@@ -194,11 +201,43 @@ var displayMostPopular = function(data)
         
         // Create button for watch list
         var watchListBtn = document.createElement("button");
-        watchListBtn.id = "watch-list-btn";
-        watchListBtn.className = "btn-floating halfway-fab waves-effect waves-light red";
-        watchListBtn.setAttribute("type", "button");
-        watchListBtn.textContent = "Watch";
+        watchListBtn.id = "watch-list-btn" + data.results[i].id ;
+        watchListBtn.classList = "watch-btn btn-floating halfway-fab waves-effect waves-light red small material-icons";
+        watchListBtn.setAttribute("value", i);
+        watchListBtn.textContent = "add";
         watchList.appendChild(watchListBtn);
+
+        
+
+      
+        // on click the button savees to local storage and change button name of button/remove from local storage
+        $('#watch-list-btn' + data.results[i].id).on('click', function(event)
+        {
+            var $this = $(this);
+            if ($this.hasClass('watch-btn'))
+            {
+                localStorage.setItem(data.results[event.target.value].title, JSON.stringify(data.results[event.target.value]));
+
+            }
+            else if ($this.hasClass('remove-btn'))
+            {
+                localStorage.removeItem(data.results[event.target.value].title, JSON.stringify(data.results[event.target.value]));
+            }
+
+            $this.toggleClass('watch-btn');
+
+            if ($this.hasClass('watch-btn'))
+            {
+                $this.text('add');
+                
+            }
+            else
+            {
+                $this.addClass('remove-btn small material-icons');
+                $this.text('remove');
+            }
+            
+        });
 
         // This handler will be executed every time the cursor is moved over a different list item
         popImg.addEventListener("mouseover", function (event) {
@@ -265,11 +304,41 @@ var displayNewReleases = function(data)
 
         // Create button for watch list
         var watchListBtn = document.createElement("button");
-        watchListBtn.id = "watch-list-btn";
-        watchListBtn.className = "btn-floating halfway-fab waves-effect waves-light red";
+        watchListBtn.id = "watch-list-btn" + data.results[i].id;
+        watchListBtn.className = "watch-btn btn-floating halfway-fab waves-effect waves-light red small material-icons";
         watchListBtn.setAttribute("type", "button");
-        watchListBtn.textContent = "Watch";
+        watchListBtn.setAttribute("value", i);
+        watchListBtn.textContent = "add";
         watchList.appendChild(watchListBtn);
+
+        
+        $('#watch-list-btn' + data.results[i].id).on('click', function(event)
+        {
+            var $this = $(this);
+            if ($this.hasClass('watch-btn'))
+            {
+                localStorage.setItem(data.results[event.target.value].title, JSON.stringify(data.results[event.target.value]));
+
+            }
+            else if ($this.hasClass('remove-btn'))
+            {
+                localStorage.removeItem(data.results[event.target.value].title, JSON.stringify(data.results[event.target.value]));
+            }
+
+            $this.toggleClass('watch-btn');
+
+            if ($this.hasClass('watch-btn'))
+            {
+                $this.text('add');
+                
+            }
+            else
+            {
+                $this.addClass('remove-btn small material-icons');
+                $this.text('remove');
+            }
+            
+        });
 
 
 
@@ -337,11 +406,42 @@ var displayCriticallyAcclaimed = function(data)
           
           // Create button for watch list
           var watchListBtn = document.createElement("button");
-          watchListBtn.id = "watch-list-btn";
-          watchListBtn.className = "btn-floating halfway-fab waves-effect waves-light red";
+          watchListBtn.id = "watch-list-btn" + data.results[i].id;
+          watchListBtn.className = "watch-btn btn-floating halfway-fab waves-effect waves-light red small material-icons";
           watchListBtn.setAttribute("type", "button");
-          watchListBtn.textContent = "Watch";
+          watchListBtn.setAttribute("value", i);
+          watchListBtn.textContent = "add";
           watchList.appendChild(watchListBtn);
+
+          
+        $('#watch-list-btn' + data.results[i].id).on('click', function(event)
+        {
+            var $this = $(this);
+            if ($this.hasClass('watch-btn'))
+            {
+                localStorage.setItem(data.results[event.target.value].title, JSON.stringify(data.results[event.target.value]));
+
+            }
+            else if ($this.hasClass('remove-btn'))
+            {
+                localStorage.removeItem(data.results[event.target.value].title, JSON.stringify(data.results[event.target.value]));
+            }
+
+            $this.toggleClass('watch-btn');
+
+            if ($this.hasClass('watch-btn'))
+            {
+                $this.text('add');
+                
+            }
+            else
+            {
+                $this.addClass('remove-btn small material-icons');
+                $this.text('remove');
+            }
+            
+        });
+
 
         // This handler will be executed every time the cursor is moved over a different list item
         critImg.addEventListener("mouseover", function (event) {
@@ -356,6 +456,8 @@ var displayCriticallyAcclaimed = function(data)
         }, false);
     }
 };
+
+
 
 var formHandler = function(event)
 {
@@ -372,5 +474,3 @@ var formHandler = function(event)
 };
 
 movieForm.addEventListener("submit", formHandler)
-
-
