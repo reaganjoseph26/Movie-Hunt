@@ -60,11 +60,40 @@ var displayNewReleases = function(data)
          
          // Create button for watch list
          var watchListBtn = document.createElement("button");
-         watchListBtn.id = "watch-list-btn";
-         watchListBtn.className = "btn-floating halfway-fab waves-effect waves-light red";
+         watchListBtn.id = "watch-list-btn" + data.results[i].id;
+         watchListBtn.className = "watch-btn btn-floating halfway-fab waves-effect waves-light red small material-icons";
          watchListBtn.setAttribute("type", "button");
-         watchListBtn.textContent = "Watch";
+         watchListBtn.setAttribute("value", i);
+         watchListBtn.textContent = "add";
          watchList.appendChild(watchListBtn);
+
+         $('#watch-list-btn' + data.results[i].id).on('click', function(event)
+         {
+             var $this = $(this);
+             if ($this.hasClass('watch-btn'))
+             {
+                 localStorage.setItem(data.results[event.target.value].title, JSON.stringify(data.results[event.target.value]));
+ 
+             }
+             else if ($this.hasClass('remove-btn'))
+             {
+                 localStorage.removeItem(data.results[event.target.value].title, JSON.stringify(data.results[event.target.value]));
+             }
+ 
+             $this.toggleClass('watch-btn');
+ 
+             if ($this.hasClass('watch-btn'))
+             {
+                 $this.text('add');
+                 
+             }
+             else
+             {
+                 $this.addClass('remove-btn small material-icons');
+                 $this.text('remove');
+             }
+             
+         });
 
         // This handler will be executed every time the cursor is moved over a different list item
         newReleaseImg.addEventListener("mouseover", function (event) {

@@ -44,16 +44,6 @@ input {
     display:inline-block;
    
 }
-
-#watch-list-btn {
-    position:absolute;
-    bottom:50%;
-    right:50%;
-    margin: 0 5px 5px 0;
-}
-#movie-trailer{
-    float: right;
-}
-#release-date{
-    font-size: 32px;
+.watch-btn, .remove-btn {
+    margin-bottom: 22px;
 }
