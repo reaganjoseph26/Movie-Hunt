@@ -83,18 +83,19 @@ var displayWatchList = function ()
         console.log($(this).text());
     });
 
-var formHandler = function(event)
-{
-    event.preventDefault();
-
-    var movieName = movieSearch.value.trim();
-    if (movieName)
+    var formHandler = function(event)
     {
-        getMovie(movieName);
-        movieSearch.value = "";
-        console.log(movieName);
-    }
-};
+        event.preventDefault();
+    
+        var movieName = movieSearch.value.trim();
+        if (movieName)
+        {
+            window.location.href = "search-results.html?movie-name=" + movieName
+    
+    
+            console.log(movieName);
+        }
+    };
 
 var getMovie = function(movie) 
 {
@@ -112,8 +113,6 @@ var getMovie = function(movie)
         }
     });
 };
-
-
 
 
 movieForm.addEventListener("submit", formHandler);

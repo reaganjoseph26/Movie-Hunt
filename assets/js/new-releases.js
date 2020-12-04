@@ -17,8 +17,8 @@ var getNewReleases = function(page)
     {
         if (response.ok)
         {
-            response.json().then(function(data)
-            {
+            response.json().then(function(data) {
+                console.log(data)
                 displayNewReleases(data);
             });
         }
@@ -33,6 +33,11 @@ var displayNewReleases = function(data)
 
     for (var i = 0; i < 20; i++)
     {
+         //create an if else statment that doesnt display movies with posters value at null 
+         //if movie poster gives a falsey response then continue to next movie 
+        if(!data.results[i].poster_path) {
+            continue;
+         }
         
         var baseUrl = "https://image.tmdb.org/t/p/w200";
 
@@ -41,9 +46,9 @@ var displayNewReleases = function(data)
 
         var newReleaseImg = document.createElement("img");
         newReleaseImg.style.padding = "1px";
-        newReleaseImg.src = baseUrl + data.results[i].poster_path;
-        newReleases.appendChild(newReleaseImg);
+        newReleaseImg.src = baseUrl + data.results[i].poster_path
 
+        newReleases.appendChild(newReleaseImg);
         popLink.appendChild(newReleaseImg);
         newReleases.appendChild(popLink);
 
@@ -117,35 +122,10 @@ var displayNewReleases = function(data)
         var movieName = movieSearch.value.trim();
         if (movieName)
         {
-            getMovie(movieName);
-            movieSearch.value = "";
+            window.location.href = "search-results.html?movie-name=" + movieName
             console.log(movieName);
         }
     };
     
-    var getMovie = function(movie) 
-    {
-        var tmdbApiUrl = "https://api.themoviedb.org/3/search/movie?api_key=b5a9c03b27f6c897638c6e5f922cad8d&language=en-US&query=" + movie + "&page=1&include_adult=false";
-    
-        fetch(tmdbApiUrl).then(function(response)
-        {
-            if (response.ok)
-            {
-                response.json().then(function(data)
-                {
-                    
-                    console.log(data);
-                });
-            }
-        });
-    };
-    
     movieForm.addEventListener("submit", formHandler);
     
-
-// var pagination = function() {
-//     console.log()
-//     // var popularpageTwo = document.createElement("div")
-// }
-
-// pagination()

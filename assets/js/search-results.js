@@ -1,35 +1,32 @@
-var popMovie = document.querySelector("#most-popular");
+var popMovie = document.querySelector("#search-results");
 var movieSearch = document.querySelector("#movie-search");
 var movieForm = document.querySelector("#movie-form");
 
+//search for the URL 
+    const queryString = window.location.search;
+    //get ids passing from one file the next, puts parameter into an object 
+    const urlParams = new URLSearchParams(queryString);
+    // only get the id from the parameters
+    const movieName = urlParams.get('movie-name');
+    // display movie information by id 
 
 window.onload = function WindowLoad() {
-    getMostPopular(1);
+
+   getMovie(1);
 }
-var getMostPopular = function (page) {
-    var tmdbApiUrl = "https://api.themoviedb.org/3/movie/popular?api_key=a01b6212f3bbba093d5cbc6d345df704&language=en-US&page=" + page
-    fetch(tmdbApiUrl).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (data) {
-                console.log(data);
 
-                displayMostPopular(data);
-            });
-        }
-    });
-};
-
-
-var displayMostPopular = function (data) {
+var displayResults = function (data) {
     popMovie.innerHTML = "";
 
-    for (var i = 0; i < 20; i++) {
+    for (var i = 0; i < data.results.length; i++) {
         if(!data.results[i].poster_path) {
             continue;
          }
          
         var baseUrl = "https://image.tmdb.org/t/p/w200"
 
+        var movieTitle = document.querySelector("title")
+        movieTitle.textContent = movieName
         var popLink = document.createElement("a");
         popLink.setAttribute('href', 'movie-info.html?id=' + data.results[i].id)
 
@@ -50,7 +47,7 @@ var displayMostPopular = function (data) {
          
          // Create button for watch list
          var watchListBtn = document.createElement("button");
-         watchListBtn.id = "watch-list-btn" + data.results[i].id;
+         watchListBtn.id = "watch-list-btn" + data.results[i].id ;
          watchListBtn.className = "watch-btn btn-floating halfway-fab waves-effect waves-light red small material-icons";
          watchListBtn.setAttribute("type", "button");
          watchListBtn.setAttribute("value", i);
@@ -84,6 +81,7 @@ var displayMostPopular = function (data) {
              }
              
          });
+ 
 
         // This handler will be executed every time the cursor is moved over a different list item
         popImg.addEventListener("mouseover", function (event) {
@@ -100,23 +98,45 @@ var displayMostPopular = function (data) {
 
 };
 
-    $(".page-btn").on("click", function () {
-        getMostPopular($(this).text());
-        console.log($(this).text());
-    })
 
-    var formHandler = function(event)
+var getMovie = function(page) 
+{
+    var tmdbApiUrl = "https://api.themoviedb.org/3/search/movie?api_key=b5a9c03b27f6c897638c6e5f922cad8d&language=en-US&query=" + movieName + "&page=" + page + "&include_adult=false";
+
+    fetch(tmdbApiUrl).then(function(response)
     {
-        event.preventDefault();
-    
-        var movieName = movieSearch.value.trim();
-        if (movieName)
+        if (response.ok)
         {
-            window.location.href = "search-results.html?movie-name=" + movieName
-    
-    
-            console.log(movieName);
+            response.json().then(function(data)
+            {
+                console.log(data)
+                displayResults(data)
+            });
         }
-    };
-    
-    movieForm.addEventListener("submit", formHandler)
+    });
+};
+
+
+$(".page-btn").on("click", function () {
+    getMovie($(this).text());
+    console.log($(this).text());
+})
+
+var formHandler = function(event)
+{
+    event.preventDefault();
+
+    var movieName = movieSearch.value.trim();
+    if (movieName)
+    {
+        window.location.href = "search-results.html?movie-name=" + movieName
+
+
+        console.log(movieName);
+    }
+};
+
+movieForm.addEventListener("submit", formHandler)
+
+
+ 

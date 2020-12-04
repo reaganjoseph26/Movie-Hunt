@@ -137,7 +137,7 @@ window.onload = function WindowLoad() {
     getMostPopular();
     getNewReleases();
     getCriticallyAcclaimed();
-    btnRefresh();
+    // btnRefresh();
 };
 
 var getMostPopular = function()
@@ -156,8 +156,8 @@ var getMostPopular = function()
     });
 };
 
-// var btnRefresh = function()
-// {
+// // var btnRefresh = function()
+// // {
     
 // }
 var displayMostPopular = function(data)
@@ -167,6 +167,11 @@ var displayMostPopular = function(data)
 
     console.log(data);
     for (var i = 0; i < 5; i++) {
+
+        if(!data.results[i].poster_path) {
+            continue;
+         }
+
         var baseUrl = "https://image.tmdb.org/t/p/w200"
 
         
@@ -179,14 +184,20 @@ var displayMostPopular = function(data)
         popImg.style.transition = "0.3s"
         popImg.src = baseUrl + data.results[i].poster_path;
 
+        // var testCard = document.querySelector("#most-popular-title") //
+        // // testCard.style = "background-color: white; color: balck"; //
+        // testCard.textContent = data.results[i].original_title //
+        
+    
+
         popLink.appendChild(popImg);
         popMovie.appendChild(popLink);
-
+     
         // Create span to put watch list btn
         var watchList = document.createElement("span");
         watchList.id = "btn-span";
         watchList.className = "card-title"
-        popMovie.appendChild(watchList);
+        popMovie.appendChild(watchList); 
         
         // Create button for watch list
         var watchListBtn = document.createElement("button");
@@ -266,6 +277,10 @@ var displayNewReleases = function(data)
 {
     for (var i = 1; i < 6; i++)
     {
+        if(!data.results[i].poster_path) {
+            continue;
+         }
+
         var baseUrl = "https://image.tmdb.org/t/p/w200"
 
         var popLink = document.createElement("a");
@@ -366,6 +381,10 @@ var displayCriticallyAcclaimed = function(data)
 
     for (var i = 0; i < 5; i++)
     {
+        if(!data.results[i].poster_path) {
+            continue;
+         }
+         
         var baseUrl = "https://image.tmdb.org/t/p/w200"
 
         var popLink = document.createElement("a");
@@ -447,30 +466,11 @@ var formHandler = function(event)
     var movieName = movieSearch.value.trim();
     if (movieName)
     {
-        getMovie(movieName);
-        movieSearch.value = "";
+        window.location.href = "search-results.html?movie-name=" + movieName
+
+
         console.log(movieName);
     }
 };
 
-var getMovie = function(movie) 
-{
-    var tmdbApiUrl = "https://api.themoviedb.org/3/search/movie?api_key=b5a9c03b27f6c897638c6e5f922cad8d&language=en-US&query=" + movie + "&page=1&include_adult=false";
-
-    fetch(tmdbApiUrl).then(function(response)
-    {
-        if (response.ok)
-        {
-            response.json().then(function(data)
-            {
-                
-                console.log(data);
-            });
-        }
-    });
-};
-
-
-
-
-movieForm.addEventListener("submit", formHandler);
+movieForm.addEventListener("submit", formHandler)
