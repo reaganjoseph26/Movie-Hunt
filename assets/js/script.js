@@ -156,10 +156,10 @@ var getMostPopular = function()
     });
 };
 
-var btnRefresh = function()
-{
+// var btnRefresh = function()
+// {
     
-}
+// }
 var displayMostPopular = function(data)
 {
     popMovie.innerHTML = "";
