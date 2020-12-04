@@ -51,3 +51,9 @@ input {
     right:50%;
     margin: 0 5px 5px 0;
 }
+#movie-trailer{
+    float: right;
+}
+#release-date{
+    font-size: 32px;
+}

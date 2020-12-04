@@ -41,7 +41,7 @@ var displayMovieDetails = function (data) {
     movieSum.textContent = "Plot overview: " + data.overview
 
     // change textContent of seconds p elemment to display the release date 
-    movieReleaseDate.textContent = "Released: " + data.release_date
+    movieReleaseDate.textContent = "Released: " +  data.release_date 
 
     //change the content of specific p element to display cast and crew of movies
     for(i = 0; i < data.credits.cast.length; i ++) {
@@ -50,7 +50,6 @@ var displayMovieDetails = function (data) {
             var castTitle = document.querySelector("#cast-title")
             castTitle.textContent = "Cast"
             castTitle.style = "font-size: 32px"
-            
             var cast = document.createElement("p")
             cast.textContent += data.credits.cast[i].original_name  
             movieCast.appendChild(cast)
