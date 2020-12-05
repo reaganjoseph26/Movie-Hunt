@@ -57,6 +57,19 @@ input {
 #movie-summary{
     font-size: 32px;
     float: right;
-    
 
+}
+#movie-cast{ 
+    float: left;
+    margin-left:20px;
+    width: 20%;
+    
+}
+#movie-crew{
+    float: left;
+    margin-left:20px;
+    width: 20%;
+    
+    
+    
 }
