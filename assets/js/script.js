@@ -156,10 +156,6 @@ var getMostPopular = function()
     });
 };
 
-// // var btnRefresh = function()
-// // {
-    
-// }
 var displayMostPopular = function(data)
 {
     popMovie.innerHTML = "";
@@ -168,6 +164,7 @@ var displayMostPopular = function(data)
     console.log(data);
     for (var i = 0; i < 5; i++) {
 
+        //to not have movies with no posteron the home page, do not display them for the home page only. 
         if(!data.results[i].poster_path) {
             continue;
          }

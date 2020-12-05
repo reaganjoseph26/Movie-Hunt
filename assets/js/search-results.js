@@ -19,23 +19,25 @@ var displayResults = function (data) {
     popMovie.innerHTML = "";
 
     for (var i = 0; i < data.results.length; i++) {
-        if(!data.results[i].poster_path) {
-            continue;
-         }
-         
-        var baseUrl = "https://image.tmdb.org/t/p/w200"
-
-        var movieTitle = document.querySelector("title")
-        movieTitle.textContent = movieName
         var popLink = document.createElement("a");
         popLink.setAttribute('href', 'movie-info.html?id=' + data.results[i].id)
+        var baseUrl = "https://image.tmdb.org/t/p/w200"
+        var movieTitle = document.querySelector("title")
 
-
-        var searchImg = document.createElement("img");
-        searchImg.style.padding = "1px"
-        searchImg.style.transition = "0.3s"
-        searchImg.src = baseUrl + data.results[i].poster_path;
-
+        if(!data.results[i].poster_path) {
+            var searchImg = document.createElement("img");
+            searchImg.src = "./assets/images/unavailable-image.jpg" 
+            searchImg.style = "width: 200px; height: 301px; padding: 1px;"
+            
+    
+         } else {
+            var searchImg = document.createElement("img");
+            searchImg.style.padding = "1px"
+            searchImg.src = baseUrl + data.results[i].poster_path;
+         }
+         
+        movieTitle.textContent = movieName
+        
         popLink.appendChild(searchImg);
         popMovie.appendChild(popLink);
 
@@ -115,6 +117,15 @@ var getMovie = function(page)
     });
 };
 
+//create a function that hides the pagination numbers is serch results are not sufficent in length
+// function hidePages(getMovie) {
+//     // if the pagination page number is greater than the json results, hide those next page numbers
+//     var pageButton = document.querySelector("page-btn")
+//     if(pageButton > page.results.length) {
+//         pageButton.style.display = "none"
+//     }
+// }
+
 
 $(".page-btn").on("click", function () {
     getMovie($(this).text());
@@ -122,9 +133,11 @@ $(".page-btn").on("click", function () {
 })
 
 // $(".next").on("click", function () {
+    
 //     getMovie($(this).text());
 //     console.log($(this).text());
 // })
+
 
 var formHandler = function(event)
 {

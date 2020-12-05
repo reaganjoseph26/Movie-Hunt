@@ -8,10 +8,8 @@ window.onload = function WindowLoad()
    displayWatchList(1);
 };
 
-var displayWatchList = function () 
-{
-
-
+var displayWatchList = function () {
+    // console.log(data)
     Object.values(localStorage).forEach((value) => 
     {
 
@@ -19,21 +17,27 @@ var displayWatchList = function ()
     });
 
     watchListEl.innerHTML = "";
-
-    for (var i = 0; i < savedMovie.length; i++) 
-    {
+    // console.log(savedMovie)
+    for (var i = 0; i < savedMovie.length; i++)  {
         var baseUrl = "https://image.tmdb.org/t/p/w200";
-
-        var loadMovie = JSON.parse(savedMovie[i]);
-
-
         var popLink = document.createElement("a");
         popLink.setAttribute('href', 'movie-info.html?id=' + savedMovie[i].id);
+        var loadMovie = JSON.parse(savedMovie[i]);
+        console.log(loadMovie)
 
-        var savedImg = document.createElement("img");
-        savedImg.style.padding = "1px";
-        savedImg.style.transition = "0.3s";
-        savedImg.src = baseUrl + loadMovie.poster_path;
+        if(!loadMovie.poster_path) {
+            var savedImg = document.createElement("img");
+            savedImg.src = "./assets/images/unavailable-image.jpg" 
+            savedImg.style = "width: 200px; height: 301px; padding: 1px;"
+            
+    
+         } else {
+            var savedImg = document.createElement("img");
+            savedImg.style.padding = "1px";
+            savedImg.src = baseUrl + loadMovie.poster_path;
+         }
+
+        // var loadMovie = JSON.parse(savedMovie[i]);
 
         popLink.appendChild(savedImg);
         watchListEl.appendChild(popLink);

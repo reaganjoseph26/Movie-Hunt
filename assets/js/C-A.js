@@ -28,20 +28,22 @@ var displayCa = function (data) {
 
     for (var i = 0; i < 20; i++) {
 
-        if(!data.results[i].poster_path) {
-            continue;
-         }
-         
         var baseUrl = "https://image.tmdb.org/t/p/w200"
-
         var popLink = document.createElement("a");
         popLink.setAttribute('href', 'movie-info.html?id=' + data.results[i].id)
 
-
-        var critImg = document.createElement("img");
-        critImg.style.padding = "1px"
-        critImg.style.transition = "0.3s"
-        critImg.src = baseUrl + data.results[i].poster_path;
+        if(!data.results[i].poster_path) {
+            var critImg = document.createElement("img");
+            critImg.src = "./assets/images/unavailable-image.jpg" 
+            popImg.style = "width: 200px; height: 301px; padding: 1px;"
+            
+    
+         } else {
+            var critImg = document.createElement("img");
+            critImg.style.padding = "1px"
+            critImg.src = baseUrl + data.results[i].poster_path;
+    
+         }
 
         popLink.appendChild(critImg);
         criticallyAcclaimedMovie.appendChild(popLink);

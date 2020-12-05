@@ -11,7 +11,6 @@ var getNewReleases = function(page)
     var pastDate = moment().subtract(120, 'days');
 
     var tmdbApiUrl = "https://api.themoviedb.org/3/discover/movie?api_key=b5a9c03b27f6c897638c6e5f922cad8d&language=en-US&region=US&sort_by=primary_release_date.desc&include_adult=false&include_video=false&release_date.gte=" + pastDate + "&release_date.lte=" + currDate + "&with_release_type=3&page=" + page;
-    // var tmdbApiUrl = "https://api.themoviedb.org/3/discover/movie?api_key=b5a9c03b27f6c897638c6e5f922cad8d&language=en-US&region=US&sort_by=primary_release_date.desc&include_adult=false&include_video=false&release_date.gte=2020-11-01&release_date.lte=2020-11-28&with_release_type=3&page=1";
 
     fetch(tmdbApiUrl).then(function(response)
     {
@@ -32,21 +31,23 @@ var displayNewReleases = function(data)
     newReleases.innerHTML = "";
 
     for (var i = 0; i < 20; i++)
-    {
-         //create an if else statment that doesnt display movies with posters value at null 
-         //if movie poster gives a falsey response then continue to next movie 
-        if(!data.results[i].poster_path) {
-            continue;
-         }
-        
+    {   
         var baseUrl = "https://image.tmdb.org/t/p/w200";
-
         var popLink = document.createElement("a");
         popLink.setAttribute('href', 'movie-info.html?id=' + data.results[i].id);
 
-        var newReleaseImg = document.createElement("img");
-        newReleaseImg.style.padding = "1px";
-        newReleaseImg.src = baseUrl + data.results[i].poster_path
+        if(!data.results[i].poster_path) {
+            var newReleaseImg = document.createElement("img");
+            newReleaseImg.src = "./assets/images/unavailable-image.jpg" 
+            newReleaseImg.style = "width: 200px; height: 301px; padding: 1px;"
+            
+    
+         } else {
+            var newReleaseImg = document.createElement("img");
+            newReleaseImg.style.padding = "1px";
+            newReleaseImg.src = baseUrl + data.results[i].poster_path
+         }
+         
 
         newReleases.appendChild(newReleaseImg);
         popLink.appendChild(newReleaseImg);
