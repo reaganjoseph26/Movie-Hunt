@@ -38,12 +38,12 @@ var displayCa = function (data) {
         popLink.setAttribute('href', 'movie-info.html?id=' + data.results[i].id)
 
 
-        var newReleaseImg = document.createElement("img");
-        newReleaseImg.style.padding = "1px"
-        newReleaseImg.style.transition = "0.3s"
-        newReleaseImg.src = baseUrl + data.results[i].poster_path;
+        var critImg = document.createElement("img");
+        critImg.style.padding = "1px"
+        critImg.style.transition = "0.3s"
+        critImg.src = baseUrl + data.results[i].poster_path;
 
-        popLink.appendChild(newReleaseImg);
+        popLink.appendChild(critImg);
         criticallyAcclaimedMovie.appendChild(popLink);
 
          // Create span to put watch list btn
@@ -93,15 +93,14 @@ var displayCa = function (data) {
         
 
         // This handler will be executed every time the cursor is moved over a different list item
-        newReleaseImg.addEventListener("mouseover", function (event) {
+        critImg.addEventListener("mouseover", function (event) {
             // highlight the mouseover target
             event.target.style.opacity = "0.5";
             event.target.style.transition = "0.3s"
 
-            // reset the styles after a short delay
-            setTimeout(function () {
-                event.target.style.opacity = "";
-            }, 900);
+            event.target.addEventListener("mouseout", function (event) {
+                     event.target.style.opacity = "";
+            })
         }, false);
     }
 

@@ -29,8 +29,17 @@ var displayMovieDetails = function (data) {
     //the image url for api images with adjustable with at the end or url 
     var baseUrl = "https://image.tmdb.org/t/p/w400"
 
-    //the dynamic movie title
-    movieTitle.textContent =  data.original_title;
+    //extract only the year from release date and create variables to hold it 
+    var movieYear = data.release_date
+    var convertedMovieYear = new Date(movieYear)
+    var year = convertedMovieYear.getFullYear()
+    var yearOnly = " (" + year + ")"
+    
+    //the dynamic movie title with only the year it was released
+    movieTitle.textContent =  data.original_title + yearOnly
+
+    // change textContent of seconds p elemment to display the full release date 
+    movieReleaseDate.textContent = "Released: " + data.release_date
 
     //create an img element to contain the movie poster
     var movieImg = document.createElement("img")
@@ -40,8 +49,7 @@ var displayMovieDetails = function (data) {
     //change the content of the p element in html to display plot previews
     movieSum.textContent = "Plot overview: " + data.overview
 
-    // change textContent of seconds p elemment to display the release date 
-    movieReleaseDate.textContent = "Released: " + data.release_date
+
 
     //change the content of specific p element to display cast and crew of movies
     for(i = 0; i < data.credits.cast.length; i ++) {

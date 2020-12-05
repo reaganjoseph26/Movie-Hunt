@@ -31,12 +31,12 @@ var displayResults = function (data) {
         popLink.setAttribute('href', 'movie-info.html?id=' + data.results[i].id)
 
 
-        var popImg = document.createElement("img");
-        popImg.style.padding = "1px"
-        popImg.style.transition = "0.3s"
-        popImg.src = baseUrl + data.results[i].poster_path;
+        var searchImg = document.createElement("img");
+        searchImg.style.padding = "1px"
+        searchImg.style.transition = "0.3s"
+        searchImg.src = baseUrl + data.results[i].poster_path;
 
-        popLink.appendChild(popImg);
+        popLink.appendChild(searchImg);
         popMovie.appendChild(popLink);
 
          // Create span to put watch list btn
@@ -84,15 +84,14 @@ var displayResults = function (data) {
  
 
         // This handler will be executed every time the cursor is moved over a different list item
-        popImg.addEventListener("mouseover", function (event) {
+        searchImg.addEventListener("mouseover", function (event) {
             // highlight the mouseover target
             event.target.style.opacity = "0.5";
             event.target.style.transition = "0.3s"
 
-            // reset the styles after a short delay
-            setTimeout(function () {
-                event.target.style.opacity = "";
-            }, 900);
+            event.target.addEventListener("mouseout", function (event) {
+                     event.target.style.opacity = "";
+            })
         }, false);
     }
 
@@ -121,6 +120,11 @@ $(".page-btn").on("click", function () {
     getMovie($(this).text());
     console.log($(this).text());
 })
+
+// $(".next").on("click", function () {
+//     getMovie($(this).text());
+//     console.log($(this).text());
+// })
 
 var formHandler = function(event)
 {

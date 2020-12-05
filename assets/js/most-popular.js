@@ -91,10 +91,9 @@ var displayMostPopular = function (data) {
             event.target.style.opacity = "0.5";
             event.target.style.transition = "0.3s"
 
-            // reset the styles after a short delay
-            setTimeout(function () {
-                event.target.style.opacity = "";
-            }, 900);
+            event.target.addEventListener("mouseout", function (event) {
+                     event.target.style.opacity = "";
+            })
         }, false);
     }
 

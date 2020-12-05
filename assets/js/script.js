@@ -181,7 +181,6 @@ var displayMostPopular = function(data)
 
         var popImg = document.createElement("img");
         popImg.style.padding = "1px"
-        popImg.style.transition = "0.3s"
         popImg.src = baseUrl + data.results[i].poster_path;
 
         // var testCard = document.querySelector("#most-popular-title") //
@@ -245,10 +244,9 @@ var displayMostPopular = function(data)
             event.target.style.opacity = "0.5";
             event.target.style.transition = "0.3s"
 
-            // reset the styles after a short delay
-            setTimeout(function () {
-                event.target.style.opacity = "";
-            }, 900);
+            event.target.addEventListener("mouseout", function (event) {
+                     event.target.style.opacity = "";
+            })
         }, false);
     }
 
@@ -341,17 +339,15 @@ var displayNewReleases = function(data)
         });
 
 
-
         // This handler will be executed every time the cursor is moved over a different list item
         newReleaseImg.addEventListener("mouseover", function (event) {
             // highlight the mouseover target
             event.target.style.opacity = "0.5";
-            event.target.style.transition = "0.3s";
+            event.target.style.transition = "0.3s"
 
-            // reset the styles after a short delay
-            setTimeout(function () {
-                event.target.style.opacity = "";
-            }, 900);
+            event.target.addEventListener("mouseout", function (event) {
+                    event.target.style.opacity = "";
+            })
         }, false);
     }
 };
@@ -449,10 +445,9 @@ var displayCriticallyAcclaimed = function(data)
             event.target.style.opacity = "0.5";
             event.target.style.transition = "0.3s"
 
-            // reset the styles after a short delay
-            setTimeout(function () {
-                event.target.style.opacity = "";
-            }, 900);
+            event.target.addEventListener("mouseout", function (event) {
+                     event.target.style.opacity = "";
+            })
         }, false);
     }
 };
