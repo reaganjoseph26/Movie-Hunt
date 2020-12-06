@@ -132,11 +132,33 @@ var getMovie = function(page)
     //     }
     // }
 
-
+    // var i = 2;
 $(".page-btn").on("click", function () {
     getMovie($(this).text());
     console.log($(this).text());
 })
+
+
+// for(i = page; i > currentPage; i++) {
+    // $(".next").on("click", function (data) {
+    //     var nextPage = data.page.results
+    //     getMovie(nextPage)
+    //     // page++
+    //     console.log(nextPage)
+    // })
+
+
+
+
+// $('.next').on('click', function(){
+//     i++;
+//     listObj.show(i, 3); 
+// })
+
+// $('.prev').on('click', function(){
+//     i--;
+//     listObj.show(i, 3); 
+// })
 
 // $(".prev").on("click", function (page) {
 //     getMovie(page) = page - 1;
