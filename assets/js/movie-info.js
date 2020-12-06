@@ -30,27 +30,26 @@ var displayMovieDetails = function (data) {
     if(!data.poster_path) {
         var movieImg = document.createElement("img");
         movieImg.src = "./assets/images/unavailable-image.jpg" 
+        movieImg.style = "width: 300px; height: 400px"
 
      } else {
           //create an img element to contain the movie poster
         var movieImg = document.createElement("img")
-        movieImg.src = baseUrl + data.poster_path
-        
+        movieImg.src = baseUrl + data.poster_path   
      }
 
-    //extract only the year from release date and create variables to hold it 
-    var movieYear = data.release_date
-    var convertedMovieYear = new Date(movieYear)
-    var year = convertedMovieYear.getFullYear()
-    var yearOnly = " (" + year + ")"
-    
-    //the dynamic movie title with only the year it was released
-    movieTitle.textContent =  data.original_title + yearOnly
-
-    // change textContent of seconds p elemment to display the full release date 
     if (!data.release_date) {
         movieReleaseDate.style.display = "none"
+        movieTitle.textContent =  data.original_title
     } else {
+        //extract only the year from release date and create variables to hold it 
+        var movieYear = data.release_date
+        var convertedMovieYear = new Date(movieYear)
+        var year = convertedMovieYear.getFullYear()
+        var yearOnly = " (" + year + ")"
+        //the dynamic movie title with only the year it was released
+        movieTitle.textContent =  data.original_title + yearOnly
+        // change textContent of seconds p elemment to display the full release date 
         movieReleaseDate.textContent = "Released: " + data.release_date
     }
 

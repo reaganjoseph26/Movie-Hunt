@@ -13,6 +13,7 @@ var movieForm = document.querySelector("#movie-form");
 window.onload = function WindowLoad() {
 
    getMovie(1);
+   
 }
 
 var displayResults = function (data) {
@@ -37,6 +38,9 @@ var displayResults = function (data) {
          }
          
         movieTitle.textContent = movieName
+
+        var searchHeading = document.querySelector("h3")
+        searchHeading.textContent = "Search results: " + movieName
         
         popLink.appendChild(searchImg);
         popMovie.appendChild(popLink);
@@ -119,12 +123,14 @@ var getMovie = function(page)
 
 //create a function that hides the pagination numbers is serch results are not sufficent in length
 // function hidePages(getMovie) {
-//     // if the pagination page number is greater than the json results, hide those next page numbers
-//     var pageButton = document.querySelector("page-btn")
-//     if(pageButton > page.results.length) {
-//         pageButton.style.display = "none"
-//     }
-// }
+    // if the pagination page number is greater than the json results, hide those next page numbers
+    // var prevPage  = function (page) {
+    //     var currentPage = 1
+    //     if(currentPage > 1) {
+    //         page--;
+    //         changePage(currentPage)
+    //     }
+    // }
 
 
 $(".page-btn").on("click", function () {
@@ -132,10 +138,15 @@ $(".page-btn").on("click", function () {
     console.log($(this).text());
 })
 
-// $(".next").on("click", function () {
-    
-//     getMovie($(this).text());
-//     console.log($(this).text());
+// $(".prev").on("click", function (page) {
+//     getMovie(page) = page - 1;
+//     // var currentPage = 1
+//     //     if(currentPage > 1) {
+//     //         page--;
+//     //         changePage(currentPage)
+//     //     }
+//     // getMovie($(this).addClass.text());
+//     console.log($(this));
 // })
 
 
