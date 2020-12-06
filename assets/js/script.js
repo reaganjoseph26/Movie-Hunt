@@ -137,8 +137,8 @@ window.onload = function WindowLoad() {
     getMostPopular();
     getNewReleases();
     getCriticallyAcclaimed();
-    // btnRefresh();
 };
+
 
 var getMostPopular = function()
 {
@@ -156,10 +156,7 @@ var getMostPopular = function()
     });
 };
 
-// // var btnRefresh = function()
-// // {
-    
-// }
+
 var displayMostPopular = function(data)
 {
     popMovie.innerHTML = "";
@@ -201,7 +198,7 @@ var displayMostPopular = function(data)
         
         // Create button for watch list
         var watchListBtn = document.createElement("button");
-        watchListBtn.id = "watch-list-btn" + data.results[i].id ;
+        watchListBtn.id = "watch-list-btn" + data.results[i].id;
         watchListBtn.classList = "watch-btn btn-floating halfway-fab waves-effect waves-light red small material-icons";
         watchListBtn.setAttribute("value", i);
         watchListBtn.textContent = "add";

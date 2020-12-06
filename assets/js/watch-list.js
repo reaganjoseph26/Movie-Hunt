@@ -11,10 +11,9 @@ window.onload = function WindowLoad()
 var displayWatchList = function () 
 {
 
-
+    savedMovie = new Array();
     Object.values(localStorage).forEach((value) => 
     {
-
         savedMovie.push(value);
     });
 
@@ -51,13 +50,17 @@ var displayWatchList = function ()
          watchListBtn.setAttribute("type", "button");
          watchListBtn.setAttribute("value", i);
          watchListBtn.textContent = "remove";
-         watchList.appendChild(watchListBtn);
-
-         $('#watch-list-btn' + savedMovie[i].id).on('click', function(event)
+         watchListBtn.onclick = (function() 
          {
-             localStorage.removeItem(savedMovie[i].id);
-
-         });
+            var currentI = i;
+            return function() 
+            { 
+                var movie = JSON.parse(savedMovie[currentI])
+                localStorage.removeItem(movie.title)
+                displayWatchList(1)
+            }
+         })();
+         watchList.appendChild(watchListBtn);
 
         // This handler will be executed every time the cursor is moved over a different list item
         watchListEl.addEventListener("mouseover", function (event) 
