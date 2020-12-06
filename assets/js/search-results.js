@@ -138,16 +138,19 @@ $(".page-btn").on("click", function () {
     console.log($(this).text());
 })
 
-
-// for(i = page; i > currentPage; i++) {
-    // $(".next").on("click", function (data) {
-    //     var nextPage = data.page.results
-    //     getMovie(nextPage)
-    //     // page++
-    //     console.log(nextPage)
+    // var nextPage = document.querySelector(".next")
+    // nextPage.addEventListener("click", function(page) {
+    //     for(i = 0; i < page; i++) {
+    //         getMovie(i)
+    //     }
+    //     console.log(page)
     // })
-
-
+    // $(".next").on("click", function () {
+    //     i = 1
+    //     var page = i++
+    //     getMovie(page)
+    //     // console.log(data)
+    // })
 
 
 // $('.next').on('click', function(){
