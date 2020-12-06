@@ -4,12 +4,11 @@ var movieForm = document.querySelector("#movie-form");
 var savedMovie = new Array();
 
 window.onload = function WindowLoad() 
-{
+{ 
    displayWatchList(1);
 };
 
 var displayWatchList = function () {
-    // console.log(data)
     Object.values(localStorage).forEach((value) => 
     {
 
@@ -21,7 +20,6 @@ var displayWatchList = function () {
     for (var i = 0; i < savedMovie.length; i++)  {
         var baseUrl = "https://image.tmdb.org/t/p/w200";
         var popLink = document.createElement("a");
-        popLink.setAttribute('href', 'movie-info.html?id=' + savedMovie[i].id);
         var loadMovie = JSON.parse(savedMovie[i]);
         console.log(loadMovie)
 
@@ -36,9 +34,7 @@ var displayWatchList = function () {
             savedImg.style.padding = "1px";
             savedImg.src = baseUrl + loadMovie.poster_path;
          }
-
-        // var loadMovie = JSON.parse(savedMovie[i]);
-
+         popLink.setAttribute('href', 'movie-info.html?id=' + loadMovie.id);
         popLink.appendChild(savedImg);
         watchListEl.appendChild(popLink);
 
@@ -98,22 +94,25 @@ var displayWatchList = function () {
         }
     };
 
-var getMovie = function(movie) 
-{
-    var tmdbApiUrl = "https://api.themoviedb.org/3/search/movie?api_key=b5a9c03b27f6c897638c6e5f922cad8d&language=en-US&query=" + movie + "&page=1&include_adult=false";
 
-    fetch(tmdbApiUrl).then(function(response)
-    {
-        if (response.ok)
-        {
-            response.json().then(function(data)
-            {
-                
-                console.log(data);
-            });
-        }
-    });
-};
+    // KEEP IN CODE BUT PSUEDO CODE OUT FOR NOW!!
+// var getMovie = function(movie) 
+// {
+//     var tmdbApiUrl = "https://api.themoviedb.org/3/search/movie?api_key=b5a9c03b27f6c897638c6e5f922cad8d&query=" + movie + "&page=1&language=en-US&append_to_response=videos";
+
+//     fetch(tmdbApiUrl).then(function(response)
+//     {
+//         if (response.ok)
+//         {
+//             response.json().then(function(data)
+//             {
+//                 console.log(data);
+//             });
+           
+//         }
+//     });
+   
+// };
 
 
 movieForm.addEventListener("submit", formHandler);
