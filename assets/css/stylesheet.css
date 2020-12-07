@@ -56,20 +56,33 @@ input {
 
 #movie-summary{
     font-size: 32px;
-    float: right;
+    position:relative; 
+    left:420px; 
+    bottom:240px;
 
 }
 #movie-cast{ 
     float: left;
-    margin-left:20px;
     width: 20%;
+    position: relative;
+    bottom: 250px;
     
 }
 #movie-crew{
     float: left;
-    margin-left:20px;
     width: 20%;
-    
-    
-    
+    position: relative;
+    bottom: 320px;
+}
+#crew-title{
+    position: relative;
+    bottom: 300px;
+}
+#cast-title{
+    position: relative;
+    bottom: 230px;
+}
+#release-date{
+    position: relative;
+    bottom: 250px;
 }
