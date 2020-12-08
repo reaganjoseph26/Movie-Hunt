@@ -1,130 +1,3 @@
-// // var youtubeApi = AIzaSyDZ1v09SfZTd-$AHu3webb7GyC__L4XRVY;
-// // https://www.youtube.com/embed/
-
-
-
-
-// //   // Load the IFrame Player API code asynchronously.
-// //   var tag = document.createElement('script');
-// //   tag.src = "https://www.youtube.com/player_api";
-// //   var firstScriptTag = document.getElementsByTagName('script')[0];
-// //   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-// //   // Replace the 'ytplayer' element with an <iframe> and
-// //   // YouTube player after the API code downloads.
-// //   var player;
-// //   function onYouTubePlayerAPIReady() {
-// //     player = new YT.Player('ytplayer', {
-// //       height: '360',
-// //       width: '640',
-// //       videoId: 'M7lc1UVf-VE'
-// //     });
-// //   }
-// // w
-
-// // http://img.omdbapi.com/?apikey=15254e38&
-
-// var movieForm = document.querySelector("#movie-form");
-// var movieSearch = document.querySelector("#movie-search");
-// var recentMovieEl = document.querySelector("#recent-movies");
-// var movieArr = new Array();
-
-
-// var formHandler = function(event)
-// {
-//     event.preventDefault();
-
-//     var movieName = movieSearch.value.trim();
-//     if (movieName)
-//     {
-//         getMovie(movieName);
-//         movieSearch.value = "";
-//         console.log(movieName);
-//     }
-// };
-
-// var recentMovieHandler = function(event)
-// {
-//     var historyBtn = event.target.getAttribute("value");
-//     if (historyBtn)
-//     {
-//         getMovie(historyBtn);
-//     }
-// };
-
-// var getMovie = function(movie) 
-// {
-//     var ombdApiUrl = "http://www.omdbapi.com/?apikey=15254e38&t=" + movie;
-
-//     fetch(ombdApiUrl).then(function(response)
-//     {
-//         if (response.ok)
-//         {
-//             response.json().then(function(data)
-//             {
-//                 displayMovie(data);
-//                 saveMovie(movie);
-//                 loadMovie();
-//                 console.log(data);
-//             });
-//         }
-//     });
-// };
-
-
-
-// var saveMovie = function(movie)
-// {
-//     // prevent search from saving twice and moves to bottom of array
-//     for (var i = 0; i < movieArr.length; i++) {
-//         if (movie === movieArr[i]) {
-//             movieArr.splice(i, 1);
-//         }
-//     }
-
-//     movieArr.push(movie);
-//     localStorage.setItem("movie", JSON.stringify(movieArr));
-// };
-
-// var loadMovie = function()
-// {
-//     // prevent movie from copying twice on page
-//     recentMovieEl.innerHTML = "";
-//     movieArr = JSON.parse(localStorage.getItem("movie"));
-//     if (movieArr && movieArr.length > 0)
-//     {
-//         newMovieArr = [...new Set(movieArr)];
-
-//         for (var i = 0; i < newMovieArr.length; i++)
-//         {
-//             var recentMovies = document.createElement("button");
-//             recentMovies.className = "list-group-item bg-secondary text-white mt-1";
-//             recentMovies.setAttribute("value", newMovieArr[i]);
-//             recentMovies.textContent = newMovieArr[i];
-//             recentMovieEl.appendChild(recentMovies);
-
-//         }
-//     }
-// };
-
-// if(localStorage.getItem("movie"))
-// {
-//     loadMovie();
-// }
-
-
-
-// movieForm.addEventListener("submit", formHandler);
-// recentMovieEl.addEventListener("click", recentMovieHandler);
-
-
-// DON"T MIND ANY OF THE ABOVE CODE. IT ACCESSES AN API WE PROBABLY WON'T USE
-
-// https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=b5a9c03b27f6c897638c6e5f922cad8d
-
-// https://image.tmdb.org/t/p/w300/4ZocdxnOO6q2UbdKye2wgofLFhB.jpg
-
-
 var popMovie = document.querySelector("#most-popular");
 var newReleases = document.querySelector("#new-releases");
 var critAcclaimed = document.querySelector("#critically-acclaimed");
@@ -137,7 +10,6 @@ window.onload = function WindowLoad() {
     getMostPopular();
     getNewReleases();
     getCriticallyAcclaimed();
-    // btnRefresh();
 };
 
 var getMostPopular = function()
@@ -164,22 +36,19 @@ var displayMostPopular = function(data)
     console.log(data);
     for (var i = 0; i < 5; i++) {
 
-        //to not have movies with no posteron the home page, do not display them for the home page only. 
-        if(!data.results[i].poster_path) {
-            continue;
-         }
-
         var baseUrl = "https://image.tmdb.org/t/p/w200"
-
-        
-
         var popLink = document.createElement("a");
         popLink.setAttribute('href', 'movie-info.html?id=' + data.results[i].id);
 
-        var popImg = document.createElement("img");
-        popImg.style.padding = "1px"
-        popImg.src = baseUrl + data.results[i].poster_path;
-        
+        if(!data.results[i].poster_path) {
+            var popImg = document.createElement("img");
+            popImg.src = "./assets/images/unavailable-image.jpg" 
+            popImg.style = "width: 200px; height: 301px; padding: 1px;"
+         } else {
+            var popImg = document.createElement("img");
+            popImg.style.padding = "1px"
+            popImg.src = baseUrl + data.results[i].poster_path;
+         }        
         popLink.appendChild(popImg);
         popMovie.appendChild(popLink);
 
@@ -276,23 +145,24 @@ var getNewReleases = function()
 
 var displayNewReleases = function(data)
 {
-    for (var i = 1; i < 6; i++)
-    {
-        if(!data.results[i].poster_path) {
-            continue;
-         }
-
+    for (var i = 1; i < 6; i++) {
         var baseUrl = "https://image.tmdb.org/t/p/w200"
-
         var popLink = document.createElement("a");
         popLink.setAttribute('href', 'movie-info.html?id=' + data.results[i].id);
 
-        // create img element to put poster into
+        if(!data.results[i].poster_path) {
+            var newReleaseImg = document.createElement("img");
+            newReleaseImg.src = "./assets/images/unavailable-image.jpg" 
+            newReleaseImg.style = "width: 200px; height: 301px; padding: 1px;"
+         } else {
+            // create img element to put poster into
         var newReleaseImg = document.createElement("img");
         newReleaseImg.id = "new-release-img";
         newReleaseImg.style.padding = "1px";
         newReleaseImg.src = baseUrl + data.results[i].poster_path;
-        newReleases.appendChild(newReleaseImg);
+         }
+        
+        // newReleases.appendChild(newReleaseImg);
 
         popLink.append(newReleaseImg);
         newReleases.append(popLink);
@@ -378,21 +248,21 @@ var displayCriticallyAcclaimed = function(data)
 {
     
 
-    for (var i = 0; i < 5; i++)
-    {
-        if(!data.results[i].poster_path) {
-            continue;
-         }
-         
+    for (var i = 0; i < 5; i++) {
         var baseUrl = "https://image.tmdb.org/t/p/w200"
-
         var popLink = document.createElement("a");
         popLink.setAttribute('href', 'movie-info.html?id=' + data.results[i].id)
 
-        var critImg = document.createElement("img");
-        critImg.style.padding = "1px"
-        critImg.src = baseUrl + data.results[i].poster_path;
-        critAcclaimed.appendChild(critImg);
+        if(!data.results[i].poster_path) {
+            var critImg = document.createElement("img");
+            critImg.src = "./assets/images/unavailable-image.jpg" 
+            critImg.style = "width: 200px; height: 301px; padding: 1px;"
+         } else {
+            var critImg = document.createElement("img");
+            critImg.style.padding = "1px"
+            critImg.src = baseUrl + data.results[i].poster_path;
+         }  
+        // critAcclaimed.appendChild(critImg);
 
         popLink.appendChild(critImg);
         critAcclaimed.appendChild(popLink);

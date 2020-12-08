@@ -2,6 +2,8 @@ var popMovie = document.querySelector("#search-results");
 var movieSearch = document.querySelector("#movie-search");
 var movieForm = document.querySelector("#movie-form");
 var movieArr = []
+var currentPage = 1
+
 
 //search for the URL 
     const queryString = window.location.search;
@@ -115,129 +117,31 @@ var getMovie = function(page)
         {
             response.json().then(function(data)
             {   
-                movieArr.push(data)
-                console.log(data)
+               // movieArr.push(data)
+                console.log(movieArr)
                 displayResults(data)
             });
         }
     });
 };
 
-//create a function that hides the pagination numbers is serch results are not sufficent in length
-// function hidePages(getMovie) {
-    // if the pagination page number is greater than the json results, hide those next page numbers
-    // var prevPage  = function (page) {
-    //     for(i = 0; i < movieArr.length; i++) {
-    //         if(page = 1) {
-    //             page++
-    //         }
-    //     }
-           
-    // }
-
-    var next = document.querySelector("next")
-    // next.addEventListener("click", function (done) {
-    //     for (var i = 1; i < 500; i++) {
-    //         movieArr.push(i);
-    //     }
-    //     done(movieArr);
-    // }) 
-
-   var test =  function(done){
-           
-             for (var i = 1; i < 196; i++) {
-                 movieArr.push(i);
-             }
-             done(movieArr);
-          }
-    
-
 $(".page-btn").on("click", function () {
-    getMovie($(this).text());
+    currentPage = parseInt($(this).text())
+    getMovie(currentPage);
     console.log($(this).text());
 })
 
-// $(".next").on("click", function () {
-//     getMovie($(this).text());
-//     console.log($(this).text());
-// })
+$(".next").on("click", function () {
+    currentPage = currentPage + 1
+    getMovie(currentPage);
+    console.log(currentPage);
+})
 
-// dataSource: function(done){
-//     var result = [];
-//     for (var i = 1; i < 196; i++) {
-//         result.push(i);
-//     }
-//     done(result);
-//  }
-
-// console.log(movieArr)
-
-//  var nextPage  = function () {
-//      for(i = 1; i < movieArr.length; i++) {
-//          movieArr.push(i)
-//          WindowLoad(i)
-//      }
-//      done(movieArr)
-//     }
-
-//  next.addEventListener("click", nextPage)
-    // $(".next").on("click", function () {
-        
-    //     for(i = 0; i <= movieArr.length; i++) {
-    //         var numPages = movieArr.length
-    //         numPages[i]
-    //     }
-    //     // console.log(getMovie(i));
-    // })
-
-    // $(function() {
-    //       $('.next').Pagination({
-        
-    //         size: movieArr.length
-            
-        
-    //       });
-        
-    //     });
-        
-
-   
-
-    // var nextPage = document.querySelector(".next")
-    // nextPage.addEventListener("click", function(page) {
-    //     for(i = 0; i < page; i++) {
-    //         getMovie(i)
-    //     }
-    //     console.log(page)
-    // })
-    // $(".next").on("click", function () {
-    //     i = 1
-    //     var page = i++
-    //     getMovie(page)
-    //     // console.log(data)
-    // })
-
-
-// $('.next').on('click', function(){
-//     i++;
-//     listObj.show(i, 3); 
-// })
-
-// $('.prev').on('click', function(){
-//     i--;
-//     listObj.show(i, 3); 
-// })
-
-// $(".prev").on("click", function (page) {
-//     getMovie(page) = page - 1;
-//     // var currentPage = 1
-//     //     if(currentPage > 1) {
-//     //         page--;
-//     //         changePage(currentPage)
-//     //     }
-//     // getMovie($(this).addClass.text());
-//     console.log($(this));
-// })
+$(".prev").on("click", function () {
+    currentPage = currentPage - 1
+    getMovie(currentPage);
+    console.log(currentPage);
+})
 
 
 var formHandler = function(event)
