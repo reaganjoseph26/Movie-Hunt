@@ -1,6 +1,9 @@
 var popMovie = document.querySelector("#search-results");
 var movieSearch = document.querySelector("#movie-search");
 var movieForm = document.querySelector("#movie-form");
+var movieArr = []
+var currentPage = 1
+
 
 //search for the URL 
     const queryString = window.location.search;
@@ -13,30 +16,35 @@ var movieForm = document.querySelector("#movie-form");
 window.onload = function WindowLoad() {
 
    getMovie(1);
+   
 }
 
 var displayResults = function (data) {
     popMovie.innerHTML = "";
 
     for (var i = 0; i < data.results.length; i++) {
-        if(!data.results[i].poster_path) {
-            continue;
-         }
-         
-        var baseUrl = "https://image.tmdb.org/t/p/w200"
-
-        var movieTitle = document.querySelector("title")
-        movieTitle.textContent = movieName
         var popLink = document.createElement("a");
         popLink.setAttribute('href', 'movie-info.html?id=' + data.results[i].id)
+        var baseUrl = "https://image.tmdb.org/t/p/w200"
+        var movieTitle = document.querySelector("title")
 
+        if(!data.results[i].poster_path) {
+            var searchImg = document.createElement("img");
+            searchImg.src = "./assets/images/unavailable-image.jpg" 
+            searchImg.style = "width: 200px; height: 301px; padding: 1px;"
+    
+         } else {
+            var searchImg = document.createElement("img");
+            searchImg.style.padding = "1px"
+            searchImg.src = baseUrl + data.results[i].poster_path;
+         }
+         
+        movieTitle.textContent = movieName
 
-        var popImg = document.createElement("img");
-        popImg.style.padding = "1px"
-        popImg.style.transition = "0.3s"
-        popImg.src = baseUrl + data.results[i].poster_path;
-
-        popLink.appendChild(popImg);
+        var searchHeading = document.querySelector("h3")
+        searchHeading.textContent = "Search results: " + movieName
+        
+        popLink.appendChild(searchImg);
         popMovie.appendChild(popLink);
 
          // Create span to put watch list btn
@@ -84,15 +92,14 @@ var displayResults = function (data) {
  
 
         // This handler will be executed every time the cursor is moved over a different list item
-        popImg.addEventListener("mouseover", function (event) {
+        searchImg.addEventListener("mouseover", function (event) {
             // highlight the mouseover target
             event.target.style.opacity = "0.5";
             event.target.style.transition = "0.3s"
 
-            // reset the styles after a short delay
-            setTimeout(function () {
-                event.target.style.opacity = "";
-            }, 900);
+            event.target.addEventListener("mouseout", function (event) {
+                     event.target.style.opacity = "";
+            })
         }, false);
     }
 
@@ -108,18 +115,33 @@ var getMovie = function(page)
         if (response.ok)
         {
             response.json().then(function(data)
-            {
-                console.log(data)
+            {   
+               movieArr.push(data)
+                console.log(movieArr)
                 displayResults(data)
             });
         }
     });
 };
 
-
 $(".page-btn").on("click", function () {
-    getMovie($(this).text());
+    currentPage = parseInt($(this).text())
+    getMovie(currentPage);
     console.log($(this).text());
+})
+
+ $(".next").on("click", function () {
+            currentPage = currentPage + 1
+            getMovie(currentPage);
+            console.log(currentPage);
+ })
+
+$(".prev").on("click", function () {
+    if(currentPage > 1) {
+        currentPage = currentPage - 1
+        getMovie(currentPage);
+    }
+    console.log(currentPage);
 })
 
 var formHandler = function(event)
@@ -137,6 +159,7 @@ var formHandler = function(event)
 };
 
 movieForm.addEventListener("submit", formHandler)
+    
 
 
  
