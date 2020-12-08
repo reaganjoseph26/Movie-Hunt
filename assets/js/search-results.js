@@ -32,7 +32,6 @@ var displayResults = function (data) {
             var searchImg = document.createElement("img");
             searchImg.src = "./assets/images/unavailable-image.jpg" 
             searchImg.style = "width: 200px; height: 301px; padding: 1px;"
-            
     
          } else {
             var searchImg = document.createElement("img");
@@ -117,7 +116,7 @@ var getMovie = function(page)
         {
             response.json().then(function(data)
             {   
-               // movieArr.push(data)
+               movieArr.push(data)
                 console.log(movieArr)
                 displayResults(data)
             });
@@ -131,18 +130,19 @@ $(".page-btn").on("click", function () {
     console.log($(this).text());
 })
 
-$(".next").on("click", function () {
-    currentPage = currentPage + 1
-    getMovie(currentPage);
-    console.log(currentPage);
-})
+ $(".next").on("click", function () {
+            currentPage = currentPage + 1
+            getMovie(currentPage);
+            console.log(currentPage);
+ })
 
 $(".prev").on("click", function () {
-    currentPage = currentPage - 1
-    getMovie(currentPage);
+    if(currentPage > 1) {
+        currentPage = currentPage - 1
+        getMovie(currentPage);
+    }
     console.log(currentPage);
 })
-
 
 var formHandler = function(event)
 {

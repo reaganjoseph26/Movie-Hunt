@@ -2,6 +2,7 @@ var watchListEl = document.querySelector("#watch-list");
 var movieSearch = document.querySelector("#movie-search");
 var movieForm = document.querySelector("#movie-form");
 var savedMovie = new Array();
+var currentPage = 1
 
 window.onload = function WindowLoad() 
 { 
@@ -74,11 +75,25 @@ var displayWatchList = function () {
 
 
 
-    $(".page-btn").on("click", function () 
-    {
-        displayWatchList($(this).text());
-        console.log($(this).text());
-    });
+$(".page-btn").on("click", function () {
+    currentPage = parseInt($(this).text())
+    displayWatchList(currentPage);
+    console.log($(this).text());
+})
+
+    $(".next").on("click", function () {
+        currentPage = currentPage + 1
+        displayWatchList(currentPage);
+        console.log(currentPage);
+})
+
+    $(".prev").on("click", function () {
+    if(currentPage > 1) {
+        currentPage = currentPage - 1
+        displayWatchList(currentPage);
+    }
+    console.log(currentPage);
+    })
 
     var formHandler = function(event)
     {

@@ -1,6 +1,7 @@
 var newReleases = document.querySelector("#new-releases");
 var movieSearch = document.querySelector("#movie-search");
 var movieForm = document.querySelector("#movie-form");
+var currentPage = 1
 
 window.onload = function WindowLoad() {
     getNewReleases(1);
@@ -110,10 +111,25 @@ var displayNewReleases = function(data)
 };
 
     
-    $(".page-btn").on("click", function () {
-        getNewReleases($(this).text());
-        console.log($(this).text());
-    });
+$(".page-btn").on("click", function () {
+    currentPage = parseInt($(this).text())
+    getNewReleases(currentPage);
+    console.log($(this).text());
+})
+
+    $(".next").on("click", function () {
+        currentPage = currentPage + 1
+        getNewReleases(currentPage);
+        console.log(currentPage);
+})
+
+    $(".prev").on("click", function () {
+    if(currentPage > 1) {
+        currentPage = currentPage - 1
+        getNewReleases(currentPage);
+    }
+    console.log(currentPage);
+    })
 
     var formHandler = function(event)
     {

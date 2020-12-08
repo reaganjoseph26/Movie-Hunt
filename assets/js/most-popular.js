@@ -1,6 +1,7 @@
 var popMovie = document.querySelector("#most-popular");
 var movieSearch = document.querySelector("#movie-search");
 var movieForm = document.querySelector("#movie-form");
+var currentPage = 1
 
 
 window.onload = function WindowLoad() {
@@ -102,9 +103,24 @@ var displayMostPopular = function (data) {
 
 };
 
-    $(".page-btn").on("click", function () {
-        getMostPopular($(this).text());
-        console.log($(this).text());
+$(".page-btn").on("click", function () {
+    currentPage = parseInt($(this).text())
+    getMostPopular(currentPage);
+    console.log($(this).text());
+})
+
+    $(".next").on("click", function () {
+        currentPage = currentPage + 1
+        getMostPopular(currentPage);
+        console.log(currentPage);
+})
+
+    $(".prev").on("click", function () {
+    if(currentPage > 1) {
+        currentPage = currentPage - 1
+        getMostPopular(currentPage);
+    }
+    console.log(currentPage);
     })
 
     var formHandler = function(event)

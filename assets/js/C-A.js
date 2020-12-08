@@ -1,8 +1,8 @@
 var criticallyAcclaimedMovie = document.querySelector("#critically-acclaimed");
 var movieSearch = document.querySelector("#movie-search");
 var movieForm = document.querySelector("#movie-form");
-// var mostPopularImg = document.querySelector("#most-popular-img");
-// var pagesEl = document.querySelector(".page-btn")
+var currentPage = 1
+
 
 window.onload = function WindowLoad() {
     getCa(1);
@@ -108,10 +108,26 @@ var displayCa = function (data) {
 
 };
 
-    $(".page-btn").on("click", function () {
-        getCa($(this).text());
-        console.log($(this).text());
-    })
+$(".page-btn").on("click", function () {
+    currentPage = parseInt($(this).text())
+    getCa(currentPage);
+    console.log($(this).text());
+})
+
+ $(".next").on("click", function () {
+            currentPage = currentPage + 1
+            getCa(currentPage);
+            console.log(currentPage);
+ })
+
+$(".prev").on("click", function () {
+    if(currentPage > 1) {
+        currentPage = currentPage - 1
+        getCa(currentPage);
+    }
+    console.log(currentPage);
+})
+
 
     var formHandler = function(event) {
     event.preventDefault();
