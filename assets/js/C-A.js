@@ -7,6 +7,7 @@ var movieForm = document.querySelector("#movie-form");
 window.onload = function WindowLoad() {
     getCa(1);
 }
+// this bit of code was provided by https://jsfiddle.net/solodev/yw7y4wez/
 
 var pagination = function(data)
     {

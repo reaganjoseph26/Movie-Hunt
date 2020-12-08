@@ -6,6 +6,8 @@ window.onload = function WindowLoad() {
     getNewReleases(1);
 }
 
+// this bit of code was provided by https://jsfiddle.net/solodev/yw7y4wez/
+
 var pagination = function(data)
     {
         

@@ -9,6 +9,8 @@ window.onload = function WindowLoad()
    pagination()
 };
 
+// this bit of code was provided by https://jsfiddle.net/solodev/yw7y4wez/
+
 var pagination = function()
     {
         

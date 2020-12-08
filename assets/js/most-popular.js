@@ -101,7 +101,7 @@ var displayMostPopular = function (data) {
 
 };
 
-
+// this bit of code was provided by https://jsfiddle.net/solodev/yw7y4wez/
     var pagination = function(data)
     {
         var numberOfPages = data.total_pages;
