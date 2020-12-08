@@ -1,6 +1,7 @@
 var popMovie = document.querySelector("#most-popular");
 var movieSearch = document.querySelector("#movie-search");
 var movieForm = document.querySelector("#movie-form");
+var currentPage = 1
 
 
 window.onload = function WindowLoad() {
@@ -24,21 +25,24 @@ var displayMostPopular = function (data) {
     popMovie.innerHTML = "";
 
     for (var i = 0; i < 20; i++) {
-        if(!data.results[i].poster_path) {
-            continue;
-         }
-         
-        var baseUrl = "https://image.tmdb.org/t/p/w200"
 
+        var baseUrl = "https://image.tmdb.org/t/p/w200"
         var popLink = document.createElement("a");
         popLink.setAttribute('href', 'movie-info.html?id=' + data.results[i].id)
 
-
-        var popImg = document.createElement("img");
-        popImg.style.padding = "1px"
-        popImg.style.transition = "0.3s"
-        popImg.src = baseUrl + data.results[i].poster_path;
-
+        if(!data.results[i].poster_path) {
+            var popImg = document.createElement("img");
+            popImg.src = "./assets/images/unavailable-image.jpg" 
+            popImg.style = "width: 200px; height: 301px; padding: 1px;"
+            
+    
+         } else {
+            var popImg = document.createElement("img");
+            popImg.style.padding = "1px"
+            popImg.src = baseUrl + data.results[i].poster_path;
+         }
+         
+    
         popLink.appendChild(popImg);
         popMovie.appendChild(popLink);
 
@@ -91,18 +95,32 @@ var displayMostPopular = function (data) {
             event.target.style.opacity = "0.5";
             event.target.style.transition = "0.3s"
 
-            // reset the styles after a short delay
-            setTimeout(function () {
-                event.target.style.opacity = "";
-            }, 900);
+            event.target.addEventListener("mouseout", function (event) {
+                     event.target.style.opacity = "";
+            })
         }, false);
     }
 
 };
 
-    $(".page-btn").on("click", function () {
-        getMostPopular($(this).text());
-        console.log($(this).text());
+$(".page-btn").on("click", function () {
+    currentPage = parseInt($(this).text())
+    getMostPopular(currentPage);
+    console.log($(this).text());
+})
+
+    $(".next").on("click", function () {
+        currentPage = currentPage + 1
+        getMostPopular(currentPage);
+        console.log(currentPage);
+})
+
+    $(".prev").on("click", function () {
+    if(currentPage > 1) {
+        currentPage = currentPage - 1
+        getMostPopular(currentPage);
+    }
+    console.log(currentPage);
     })
 
     var formHandler = function(event)

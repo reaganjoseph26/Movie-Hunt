@@ -10,7 +10,7 @@ var movieSearch = document.querySelector("#movie-search");
 var movieForm = document.querySelector("#movie-form");
 
 var getMovieDetails = function (id) {
-    var tmdbApiUrl = "https://api.themoviedb.org/3/movie/" + id + "?api_key=a01b6212f3bbba093d5cbc6d345df704&append_to_response=credits&language=en-US"
+    var tmdbApiUrl = "https://api.themoviedb.org/3/movie/" + id + "?api_key=b5a9c03b27f6c897638c6e5f922cad8d&append_to_response=credits&language=en-US&region=US&sort_by=primary_release_date.desc&include_adult=false&include_video=false&release_date.gte="
     fetch(tmdbApiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
@@ -22,26 +22,43 @@ var getMovieDetails = function (id) {
 };
 
 var displayMovieDetails = function (data) {
-
+    //the image url for api images with adjustable with at the end or url 
+    var baseUrl = "https://image.tmdb.org/t/p/w400"
     //make title of page dynamic/ it changes based on the movie displaying
     pageTitle.textContent = data.original_title
 
-    //the image url for api images with adjustable with at the end or url 
-    var baseUrl = "https://image.tmdb.org/t/p/w400"
+    if(!data.poster_path) {
+        var movieImg = document.createElement("img");
+        movieImg.src = "./assets/images/unavailable-image.jpg" 
+        movieImg.style = "width: 300px; height: 400px"
 
-    //the dynamic movie title
-    movieTitle.textContent =  data.original_title;
+     } else {
+          //create an img element to contain the movie poster
+        var movieImg = document.createElement("img")
+        movieImg.src = baseUrl + data.poster_path   
+     }
 
-    //create an img element to contain the movie poster
-    var movieImg = document.createElement("img")
-    movieImg.src = baseUrl + data.poster_path
+    if (!data.release_date) {
+        movieReleaseDate.style.display = "none"
+        movieTitle.textContent =  data.original_title
+    } else {
+        //extract only the year from release date and create variables to hold it 
+        var movieYear = data.release_date
+        var convertedMovieYear = new Date(movieYear)
+        var year = convertedMovieYear.getFullYear()
+        var yearOnly = " (" + year + ")"
+        //the dynamic movie title with only the year it was released
+        movieTitle.textContent =  data.original_title + yearOnly
+        // change textContent of seconds p elemment to display the full release date 
+        movieReleaseDate.textContent = "Released: " + data.release_date
+    }
+
     moviePoster.appendChild(movieImg)
 
     //change the content of the p element in html to display plot previews
     movieSum.textContent = "Plot overview: " + data.overview
 
-    // change textContent of seconds p elemment to display the release date 
-    movieReleaseDate.textContent = "Released: " + data.release_date
+
 
     //change the content of specific p element to display cast and crew of movies
     for(i = 0; i < data.credits.cast.length; i ++) {
@@ -80,7 +97,7 @@ var displayMovieDetails = function (data) {
 };
 
 var getVideo = function (id) {
-
+    
     var tmdbApiUrl = "https://api.themoviedb.org/3/movie/" + id + "?api_key=b5a9c03b27f6c897638c6e5f922cad8d&append_to_response=videos&language=en-US"
     fetch(tmdbApiUrl).then(function (response) {
         response.json().then(function (data) {
