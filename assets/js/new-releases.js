@@ -5,6 +5,57 @@ var movieForm = document.querySelector("#movie-form");
 window.onload = function WindowLoad() {
     getNewReleases(1);
 }
+
+var pagination = function(data)
+    {
+        
+        var numberOfPages = data.total_pages;
+        $('.pagination').twbsPagination({
+            totalPages: numberOfPages,
+            // the current page that show on start
+            startPage: 1,
+            
+            // maximum visible pages
+            visiblePages: 5,
+            
+            initiateStartPageClick: true,
+            
+            // template for pagination links
+            href: false,
+            
+            // variable name in href template for page number
+            hrefVariable: '{{number}}',
+            
+            // Text labels
+            first: 'First',
+            prev: 'Previous',
+            next: 'Next',
+            last: 'Last',
+            
+            // carousel-style pagination
+            loop: false,
+            
+            // callback function
+            onPageClick: function (event, page) {
+                $('.page-active').removeClass('page-active');
+              $('#page'+page).addClass('page-active');
+
+              getNewReleases(page);
+            },
+            
+            // pagination Classes
+            paginationClass: 'pagination',
+            nextClass: 'next',
+            prevClass: 'prev',
+            lastClass: 'last',
+            firstClass: 'first',
+            pageClass: 'page',
+            activeClass: 'active',
+            disabledClass: 'disabled'
+            
+            });
+    
+    }
 var getNewReleases = function(page)
 {
     var currDate = moment().format("YYYY-MM-DD");
@@ -20,6 +71,7 @@ var getNewReleases = function(page)
             response.json().then(function(data) {
                 console.log(data)
                 displayNewReleases(data);
+                pagination(data);
             });
         }
     });
@@ -108,12 +160,6 @@ var displayNewReleases = function(data)
         }, false);
     }
 };
-
-    
-    $(".page-btn").on("click", function () {
-        getNewReleases($(this).text());
-        console.log($(this).text());
-    });
 
     var formHandler = function(event)
     {

@@ -1,14 +1,66 @@
 var watchListEl = document.querySelector("#watch-list");
 var movieSearch = document.querySelector("#movie-search");
 var movieForm = document.querySelector("#movie-form");
-var savedMovie = new Array();
+var savedMovie =  Object.values(localStorage);
 
 window.onload = function WindowLoad() 
 {
    displayWatchList(1);
+   pagination()
 };
 
-var displayWatchList = function () 
+var pagination = function()
+    {
+        
+        var numberOfPages = Math.ceil(savedMovie.length / 20);
+        $('.pagination').twbsPagination({
+            totalPages: numberOfPages,
+            // the current page that show on start
+            startPage: 1,
+            
+            // maximum visible pages
+            visiblePages: 5,
+            
+            initiateStartPageClick: true,
+            
+            // template for pagination links
+            href: false,
+            
+            // variable name in href template for page number
+            hrefVariable: '{{number}}',
+            
+            // Text labels
+            first: 'First',
+            prev: 'Previous',
+            next: 'Next',
+            last: 'Last',
+            
+            // carousel-style pagination
+            loop: false,
+            
+            // callback function
+            onPageClick: function (event, page) {
+                $('.page-active').removeClass('page-active');
+              $('#page'+page).addClass('page-active');
+
+              displayWatchList(page);
+            },
+            
+            // pagination Classes
+            paginationClass: 'pagination',
+            nextClass: 'next',
+            prevClass: 'prev',
+            lastClass: 'last',
+            firstClass: 'first',
+            pageClass: 'page',
+            activeClass: 'active',
+            disabledClass: 'disabled'
+            
+            });
+    
+    };
+
+var displayWatchList = function(page) 
 {
 
     savedMovie = new Array();
@@ -17,9 +69,16 @@ var displayWatchList = function ()
         savedMovie.push(value);
     });
 
+    // creates pages for amount on content saved to local storage
+    var startIndex = 20 * (page - 1);
+    var endIndex = 20 * page;
+    if (savedMovie.length < endIndex) {
+        endIndex = savedMovie.length;
+    }
+    
     watchListEl.innerHTML = "";
 
-    for (var i = 0; i < savedMovie.length; i++) 
+    for (var i = startIndex; i < endIndex; i++) 
     {
         var baseUrl = "https://image.tmdb.org/t/p/w200";
 
@@ -77,14 +136,6 @@ var displayWatchList = function ()
         }, false);
     }
 };
-
-
-
-    $(".page-btn").on("click", function () 
-    {
-        displayWatchList($(this).text());
-        console.log($(this).text());
-    });
 
     var formHandler = function(event)
     {

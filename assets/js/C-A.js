@@ -7,6 +7,57 @@ var movieForm = document.querySelector("#movie-form");
 window.onload = function WindowLoad() {
     getCa(1);
 }
+
+var pagination = function(data)
+    {
+        
+        var numberOfPages = data.total_pages;
+        $('.pagination').twbsPagination({
+            totalPages: numberOfPages,
+            // the current page that show on start
+            startPage: 1,
+            
+            // maximum visible pages
+            visiblePages: 5,
+            
+            initiateStartPageClick: true,
+            
+            // template for pagination links
+            href: false,
+            
+            // variable name in href template for page number
+            hrefVariable: '{{number}}',
+            
+            // Text labels
+            first: 'First',
+            prev: 'Previous',
+            next: 'Next',
+            last: 'Last',
+            
+            // carousel-style pagination
+            loop: false,
+            
+            // callback function
+            onPageClick: function (event, page) {
+                $('.page-active').removeClass('page-active');
+              $('#page'+page).addClass('page-active');
+
+              getCa(page);
+            },
+            
+            // pagination Classes
+            paginationClass: 'pagination',
+            nextClass: 'next',
+            prevClass: 'prev',
+            lastClass: 'last',
+            firstClass: 'first',
+            pageClass: 'page',
+            activeClass: 'active',
+            disabledClass: 'disabled'
+            
+            });
+    
+    }
 var getCa= function (page) {
     var tmdbApiUrl = "https://api.themoviedb.org/3/discover/movie?api_key=b5a9c03b27f6c897638c6e5f922cad8d&language=en-US&region=US&sort_by=vote_average.desc&include_adult=false&include_video=false&with_release_type=3&vote_count.gte=10000&page=" + page
     fetch(tmdbApiUrl).then(function (response) {
@@ -15,12 +66,11 @@ var getCa= function (page) {
                 console.log(data);
 
                 displayCa(data);
+                pagination(data);
             });
         }
     });
 };
-
-// As of right now to get an img to show you have to call the getMostPopular() in the console
 
 var displayCa = function (data) {
 
@@ -107,13 +157,8 @@ var displayCa = function (data) {
 
 };
 
-    $(".page-btn").on("click", function () {
-        getCa($(this).text());
-        console.log($(this).text());
-    })
-
     var formHandler = function(event) {
-    event.preventDefault();
+        event.preventDefault();
 
     var movieName = movieSearch.value.trim();
     if (movieName)
