@@ -186,7 +186,7 @@ var displayMostPopular = function(data)
         // var testCard = document.querySelector("span") //
         // // testCard.style = "background-color: black; color: white"; //
         // testCard.textContent = data.results[i].original_title //
-        // // testCard.addClass = "card-content" //
+        // testCard.addClass = "card-content" //
 
         // var testCard = document.createElement("div") //
         // testCard.style = "background-color: black; color: white; width: 30px" //
