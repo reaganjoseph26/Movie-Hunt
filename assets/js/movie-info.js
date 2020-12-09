@@ -58,12 +58,6 @@ var displayMovieDetails = function (data) {
     //change the content of the p element in html to display plot previews
     movieSum.textContent = "Plot overview: " + data.overview
 
-<<<<<<< HEAD
-    // change textContent of seconds p elemment to display the release date 
-    movieReleaseDate.textContent = "Released: " +  data.release_date 
-=======
-
->>>>>>> 0163202c1fed21f711859507fbf7049a42c8e111
 
     //change the content of specific p element to display cast and crew of movies
     for(i = 0; i < data.credits.cast.length; i ++) {

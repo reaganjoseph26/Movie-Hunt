@@ -65,24 +65,24 @@ input {
     float: left;
     width: 20%;
     position: relative;
-    bottom: 250px;
+    bottom: 630px;
     
 }
 #movie-crew{
     float: left;
     width: 20%;
     position: relative;
-    bottom: 320px;
+    bottom: 700px;
 }
 #crew-title{
     position: relative;
-    bottom: 300px;
+    bottom: 670px;
 }
 #cast-title{
     position: relative;
-    bottom: 230px;
+    bottom: 600px;
 }
 #release-date{
     position: relative;
-    bottom: 250px;
+    bottom: 650px;
 }
