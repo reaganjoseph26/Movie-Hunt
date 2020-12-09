@@ -60,38 +60,74 @@ var displayMovieDetails = function (data) {
 
 
 
-    //change the content of specific p element to display cast and crew of movies
-    for(i = 0; i < data.credits.cast.length; i ++) {
+   // Cast title needs to be out of for loop to not be hidden indirectly
+    var castTitle = document.querySelector("#cast-title")
+    castTitle.textContent = "Cast"
+    castTitle.style = "font-size: 32px"
 
-        if(data.credits.cast) {
-            var castTitle = document.querySelector("#cast-title")
-            castTitle.textContent = "Cast"
-            castTitle.style = "font-size: 32px"
-            
+     //change the content of specific p element to display cast and crew of movies
+     
+        if(data.credits.cast.length) {
+            for(i = 0; i < data.credits.cast.length; i ++) {
             var cast = document.createElement("p")
             cast.textContent += data.credits.cast[i].original_name  
             movieCast.appendChild(cast)
-           
-        } else {
             movieCast.style.display = "none"
-        }
-
-     }
-
-     for(i = 0; i < data.credits.crew.length; i ++) {
-         if(data.credits.crew) {
-            var crewTitle = document.querySelector("#crew-title")
-            crewTitle.textContent = "Crew"
-            crewTitle.style = "font-size: 32px"
+            }
+        } else {
+            var cast = document.createElement("p")
+            cast.textContent = "No cast avaiable" 
+            movieCast.appendChild(cast)
+            movieCast.style.display = "none"
             
+        }
+     
+
+     var collCast = document.getElementById("cast-collapse")
+     // this bit of logic came from w3 schools
+     
+        collCast.addEventListener("click", function() {
+          this.classList.toggle("clicked");
+         
+          if (movieCast.style.display === "block") {
+            movieCast.style.display = "none";
+          } else {
+            movieCast.style.display = "block";
+          }
+        });
+      
+        var crewTitle = document.querySelector("#crew-title")
+        crewTitle.textContent = "Crew"
+        crewTitle.style = "font-size: 32px"
+
+     
+         if(data.credits.crew.length) {
+            for(i = 0; i < data.credits.crew.length; i ++) {
             var crew = document.createElement("p")
             crew.textContent += data.credits.crew[i].original_name 
             movieCrew.appendChild(crew)
+            movieCrew.style.display = "none"
+            }
          } else {
+            var crew = document.createElement("p")
+            crew.textContent = "No crew avaiable"
+            movieCrew.appendChild(crew)
             movieCrew.style.display = "none"
          }
-        
-     }
+
+     var collCrew = document.getElementById("crew-collapse")
+     // this bit of logic came from w3 schools
+     
+        collCrew.addEventListener("click", function() {
+          this.classList.toggle("clicked");
+         
+          if (movieCrew.style.display === "block") {
+            movieCrew.style.display = "none";
+          } else {
+            movieCrew.style.display = "block";
+          }
+        });
+      
 
 
 };
@@ -114,17 +150,6 @@ var getVideo = function (id) {
     })
 }
 
-var getRating = function (id) {
-    var omddbApiUrl = "http://www.omdbapi.com/?t=" + id + "&apikey=271cf8f4"
-    fetch(omddbApiUrl).then(function (response) {
-        response.json().then(function (data) {
-            console.log(data)
-        })
-        
-    })
-}
-
-
 window.onload = function WindowLoad() {
     //function for when a movie is clicked on a different page it takes the user to a sepreate html
 
@@ -137,7 +162,6 @@ window.onload = function WindowLoad() {
     // display movie information by id 
     getMovieDetails(movieId);
     getVideo(movieId)
-    getRating(movieId)
    
 }
 

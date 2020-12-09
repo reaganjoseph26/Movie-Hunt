@@ -53,18 +53,6 @@ var displayMostPopular = function(data)
         popLink.appendChild(popImg);
         popMovie.appendChild(popLink);
 
-        // var testCard = document.querySelector("span") //
-        // // testCard.style = "background-color: black; color: white"; //
-        // testCard.textContent = data.results[i].original_title //
-        // testCard.addClass = "card-content" //
-
-        // var testCard = document.createElement("div") //
-        // testCard.style = "background-color: black; color: white; width: 30px" //
-        // testCard.textContent = data.results[i].original_title //
-        // testCard.className = "row col-2"
-        // popLink.appendChild(testCard)// 
-        
-     
         // Create span to put watch list btn
         var watchList = document.createElement("span");
         watchList.id = "btn-span";
