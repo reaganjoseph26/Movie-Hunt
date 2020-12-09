@@ -114,6 +114,16 @@ var getVideo = function (id) {
     })
 }
 
+var getRating = function (id) {
+    var omddbApiUrl = "http://www.omdbapi.com/?t=" + id + "&apikey=271cf8f4"
+    fetch(omddbApiUrl).then(function (response) {
+        response.json().then(function (data) {
+            console.log(data)
+        })
+        
+    })
+}
+
 
 window.onload = function WindowLoad() {
     //function for when a movie is clicked on a different page it takes the user to a sepreate html
@@ -127,6 +137,7 @@ window.onload = function WindowLoad() {
     // display movie information by id 
     getMovieDetails(movieId);
     getVideo(movieId)
+    getRating(movieId)
    
 }
 
