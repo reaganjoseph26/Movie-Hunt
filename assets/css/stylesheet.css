@@ -1,0 +1,118 @@
+* {
+    box-sizing: border-box;
+}
+ body {
+     background-color:white;  
+ }
+
+ h3 {
+     color: black;
+     text-align: center;background-color: silver;
+
+ }
+nav ul a  {
+    font-size: 20px;
+}
+#current a {
+    color: red;
+}
+
+nav ul a:hover {
+    color: red;
+}
+
+
+#search-bar {
+    margin-left: 30px;
+}
+
+input {
+    color: white
+}
+
+.pagination {
+    font-size: 30px;
+    
+}
+
+.pagination a {
+    color: black;
+}
+
+#btn-span {
+    position:relative;
+    display:inline-block;
+   
+}
+.watch-btn, .remove-btn {
+    margin-bottom: 22px;
+}
+
+#movie-trailer{
+    float: right;
+}
+
+#release-date{
+    font-size: 32px;
+}
+
+#movie-sum{
+    font-size: 32px;
+    position:relative; 
+    left:420px; 
+    bottom:240px;
+}
+
+/* #movie-cast{ 
+    float: left;
+    width: 20%;
+    position: relative;
+    bottom: 630px;
+    
+}
+#movie-crew{
+    float: left;
+    width: 20%;
+    position: relative;
+    bottom: 700px;
+} */
+/* #crew-title{
+    position: relative;
+    bottom: 670px;
+}
+#cast-title{
+    position: relative;
+    bottom: 600px;
+} */
+
+.collapsible:focus {
+    background-color: red;
+}
+
+/* next lines of css code came from w3 schools */
+.collapsible {
+    background-color:black;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+  }
+ .collapsible:hover {
+    background-color:red;
+  }
+
+  .collapsible:after {
+    content: '\02795'; /* Unicode character for "plus" sign (+) */
+    font-size: 13px;
+    color: white;
+    float: right;
+    margin-left: 5px;
+  }
+  
+  .clicked:after {
+    content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
+  
