@@ -48,42 +48,12 @@ input {
     margin-bottom: 22px;
 }
 
-#movie-trailer{
-    float: right;
-}
 
 #release-date{
     font-size: 32px;
 }
 
-#movie-sum{
-    font-size: 32px;
-    position:relative; 
-    left:420px; 
-    bottom:240px;
-}
 
-/* #movie-cast{ 
-    float: left;
-    width: 20%;
-    position: relative;
-    bottom: 630px;
-    
-}
-#movie-crew{
-    float: left;
-    width: 20%;
-    position: relative;
-    bottom: 700px;
-} */
-/* #crew-title{
-    position: relative;
-    bottom: 670px;
-}
-#cast-title{
-    position: relative;
-    bottom: 600px;
-} */
 
 .collapsible:focus {
     background-color: red;
@@ -114,5 +84,9 @@ input {
   
   .clicked:after {
     content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
+
+#most-popular, #new-releases, #critically-acclaimed {
+    text-align: center;
 }
   
