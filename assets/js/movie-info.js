@@ -8,6 +8,26 @@ var movieCast = document.querySelector("#movie-cast")
 var movieCrew = document.querySelector("#movie-crew")
 var movieSearch = document.querySelector("#movie-search");
 var movieForm = document.querySelector("#movie-form");
+var logoLink = document.querySelector("#logo")
+
+var logo = function (data) {
+    var gifURL = "https://api.giphy.com/v1/gifs/o5AArudfqI9znPSjQX?api_key=6XngDpl7fXmk1MATKhTD7H9kasRzSkQH"
+    
+    fetch(gifURL).then(function(response) {
+        if (response.ok) {
+            response.json().then(function (data) {
+               console.log(data)
+            });
+
+            var baseLogoUrl = "https://media0.giphy.com/media/o5AArudfqI9znPSjQX/480w_s.jpg?cid=a84b9a2db10c6d737957081daa813389489c05d664161149&rid=400w_s.jpg" 
+            var movieHuntLogo = document.createElement("img")
+            movieHuntLogo.src = baseLogoUrl 
+            movieHuntLogo.style = "width: 120px"
+            logoLink.style = "height: -webkit-fill-available; margin-left: 400px"
+            logoLink.appendChild(movieHuntLogo)
+        }
+    })
+};
 
 var getMovieDetails = function (id) {
     var tmdbApiUrl = "https://api.themoviedb.org/3/movie/" + id + "?api_key=b5a9c03b27f6c897638c6e5f922cad8d&append_to_response=credits&language=en-US&region=US&sort_by=primary_release_date.desc&include_adult=false&include_video=false&release_date.gte="
@@ -162,6 +182,7 @@ window.onload = function WindowLoad() {
     // display movie information by id 
     getMovieDetails(movieId);
     getVideo(movieId)
+    logo()
    
 }
 
@@ -180,5 +201,7 @@ var formHandler = function(event)
 };
 
 movieForm.addEventListener("submit", formHandler)
+
+
 
 

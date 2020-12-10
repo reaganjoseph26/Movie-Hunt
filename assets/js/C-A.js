@@ -2,11 +2,33 @@ var criticallyAcclaimedMovie = document.querySelector("#critically-acclaimed");
 var movieSearch = document.querySelector("#movie-search");
 var movieForm = document.querySelector("#movie-form");
 var currentPage = 1
+var logoLink = document.querySelector("#logo")
 
 
 window.onload = function WindowLoad() {
     getCa(1);
+    logo()
 }
+
+var logo = function (data) {
+    var gifURL = "https://api.giphy.com/v1/gifs/o5AArudfqI9znPSjQX?api_key=6XngDpl7fXmk1MATKhTD7H9kasRzSkQH"
+    
+    fetch(gifURL).then(function(response) {
+        if (response.ok) {
+            response.json().then(function (data) {
+               console.log(data)
+            });
+
+            var baseLogoUrl = "https://media0.giphy.com/media/o5AArudfqI9znPSjQX/480w_s.jpg?cid=a84b9a2db10c6d737957081daa813389489c05d664161149&rid=400w_s.jpg" 
+            var movieHuntLogo = document.createElement("img")
+            movieHuntLogo.src = baseLogoUrl 
+            movieHuntLogo.style = "width: 120px"
+            logoLink.style = "height: -webkit-fill-available; margin-left: 400px"
+            logoLink.appendChild(movieHuntLogo)
+        }
+    })
+};
+
 var getCa= function (page) {
     var tmdbApiUrl = "https://api.themoviedb.org/3/discover/movie?api_key=b5a9c03b27f6c897638c6e5f922cad8d&language=en-US&region=US&sort_by=vote_average.desc&include_adult=false&include_video=false&with_release_type=3&vote_count.gte=10000&page=" + page
     fetch(tmdbApiUrl).then(function (response) {

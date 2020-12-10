@@ -4,12 +4,33 @@ var critAcclaimed = document.querySelector("#critically-acclaimed");
 var movieSearch = document.querySelector("#movie-search");
 var movieForm = document.querySelector("#movie-form");
 var mostPopularImg = document.querySelector("#most-popular-img");
+var logoLink = document.querySelector("#logo")
 
 
 window.onload = function WindowLoad() {
     getMostPopular();
     getNewReleases();
     getCriticallyAcclaimed();
+    logo();
+};
+
+var logo = function (data) {
+    var gifURL = "https://api.giphy.com/v1/gifs/o5AArudfqI9znPSjQX?api_key=6XngDpl7fXmk1MATKhTD7H9kasRzSkQH"
+    
+    fetch(gifURL).then(function(response) {
+        if (response.ok) {
+            response.json().then(function (data) {
+               console.log(data)
+            });
+
+            var baseLogoUrl = "https://media0.giphy.com/media/o5AArudfqI9znPSjQX/480w_s.jpg?cid=a84b9a2db10c6d737957081daa813389489c05d664161149&rid=400w_s.jpg" 
+            var movieHuntLogo = document.createElement("img")
+            movieHuntLogo.src = baseLogoUrl 
+            movieHuntLogo.style = "width: 120px"
+            logoLink.style = "height: -webkit-fill-available; margin-left: 400px"
+            logoLink.appendChild(movieHuntLogo)
+        }
+    })
 };
 
 
