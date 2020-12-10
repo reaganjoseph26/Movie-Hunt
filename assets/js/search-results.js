@@ -134,10 +134,22 @@ var getMovie = function(page)
     {
         if (response.ok)
         {
-            response.json().then(function(data)
-            {   
-               
-                displayResults(data)
+            response.json().then(function(data) {   
+                // console.log(data)
+
+                for (let index = 1; index <= 6; index++) {
+                    var pageNum = document.querySelector("#btn-" + index)
+
+                    if(index > data.total_pages) {
+                        pageNum.style.display = "none";
+                    }
+
+                }
+
+               if(data.results.length !== 0) { 
+                    displayResults(data)
+               } else {
+               }
             });
         }
     });
@@ -150,9 +162,17 @@ $(".page-btn").on("click", function () {
 })
 
  $(".next").on("click", function () {
-            currentPage = currentPage + 1
-            getMovie(currentPage);
-            console.log(currentPage);
+     
+            currentPage = currentPage + 1;
+             getMovie(currentPage);
+
+            // console.log(gotResults);
+
+            // if(gotResults) {
+            //     currentPage = currentPage + 1;
+            // }
+
+            // console.log(currentPage);
  })
 
 $(".prev").on("click", function () {

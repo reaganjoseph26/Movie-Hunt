@@ -49,7 +49,7 @@ input {
 }
 
 #movie-trailer{
-    float: right;
+    /* float: right; */
 }
 
 #release-date{
@@ -58,9 +58,9 @@ input {
 
 #movie-sum{
     font-size: 32px;
-    position:relative; 
+    /* position:relative; 
     left:420px; 
-    bottom:240px;
+    bottom:240px; */
 }
 
 /* #movie-cast{ 
