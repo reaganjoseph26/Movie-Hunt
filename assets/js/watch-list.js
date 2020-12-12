@@ -137,24 +137,11 @@ $(".page-btn").on("click", function () {
     };
 
 
-    // KEEP IN CODE BUT PSUEDO CODE OUT FOR NOW!!
-// var getMovie = function(movie) 
-// {
-//     var tmdbApiUrl = "https://api.themoviedb.org/3/search/movie?api_key=b5a9c03b27f6c897638c6e5f922cad8d&query=" + movie + "&page=1&language=en-US&append_to_response=videos";
-
-//     fetch(tmdbApiUrl).then(function(response)
-//     {
-//         if (response.ok)
-//         {
-//             response.json().then(function(data)
-//             {
-//                 console.log(data);
-//             });
-           
-//         }
-//     });
-   
-// };
+   // init for hamburger for mobile responsivness. Directly from materialize. 
+    document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, instances);
+  });
 
 
 movieForm.addEventListener("submit", formHandler);

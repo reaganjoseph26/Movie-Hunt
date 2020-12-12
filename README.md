@@ -30,7 +30,7 @@ Moment.js was used mainly to display newly released movies. It helped with filte
 ## Front End: Adrian Mike & Khyra Everette
 After gathering the APIs to be used the next step was to set up the structure of the index.html. This is where materalize came in give us a jump to the structure. Figuring out the placing of the rows and reading up on documentation as to what the sizing the columns should be. Throughtout the project, more html files were added and they took upon the same strcutre as well. Making Movie-Hunt mobile responsive was a combination of classes givien to us through materalize and the usage of media queries in CSS stylesheet. 
 
-## Back End: Reagan Joseph & Dalton Morrell
+## Back End: Reagan Joseph & Dalton Morrel
 
 - Start: The process for the functionality of Movie-Hunt started with fetching The Movie Database API call. After that we would use the data do target what we needed and have it dynamically append to the page throught the div with the unique id. That basic part was duplicated for displaying the movies on all our our htmls. 
 
