@@ -91,7 +91,7 @@ var displayMostPopular = function(data)
         
 
       
-        // on click the button savees to local storage and change button name of button/remove from local storage
+        // on click the button saves to local storage and change button name of button/remove from local storage
         $('#watch-list-btn' + data.results[i].id).on('click', function(event)
         {
             var $this = $(this);
@@ -334,6 +334,12 @@ var displayCriticallyAcclaimed = function(data)
         }, false);
     }
 };
+
+// init for hamburger for mobile responsivness. Directly from materialize. 
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, instances);
+  });
 
 
 

@@ -36,7 +36,7 @@ After gathering the APIs to be used the next step was to set up the structure of
 
 - MovieIDs: To get the specific data for a movie, we passed the parameter of id and concatenate the id in the api URL. We then used the data as a parameter to display the information we wanted on the page. With our movie-info page, when a movie is clicked and the information pages pops up, functionality we creating a query string using windows location.search and from there we would create a new url that targeting the parameters. We would only take the movie id form the parameter and place that into a variable. That variable with the new url was then used as a parameter for our function call onload. That is how we passed the movie id from one html to the movie-info html. 
 
-- Local Storage: Our local storgae is activated on a click from the button appened to the movie posters. What this does is.... 
+- Local Storage: Our local storgae is activated on a click from the button appened to the movie posters. What this does is sets the target movie into local storage if it has a watch-btn class and if it has a remove class then it will remove local storage on click. 
 
 
 ## Screenshots
