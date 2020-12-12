@@ -53,8 +53,8 @@ After gathering the APIs to be used the next step was to set up the structure of
 ![Image](/assets/images/Screenshot-watchlist.jpg)
 
 
-## Deployed Link: 
-## Movie-Hunt Repo: 
+## Deployed Link: https://reaganjoseph26.github.io/Movie-Hunt/ 
+## Movie-Hunt Repo: https://github.com/reaganjoseph26/Movie-Hunt.git
 
 
 
