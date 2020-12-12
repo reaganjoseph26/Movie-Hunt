@@ -18,13 +18,17 @@ The HTML structure and majority of the CSS was done through the framwork of Mate
 
 ## Screenshots
 
+An image of the homepage. 
 ![Image](/assets/images/Screenshot-home.jpg)
 
 An image of the the results reponse after a search. Notice the pagination fits appropiatley to do the total pages of results for that movie search. The plus buttons on the images indicate that the movie can be added into your watch-list. 
+
 ![Image](/assets/images/Screenshot-searches.jpg)
 
 An image of the watch-list page. Notice the minus signs on the movie posters indicating a user can only remove that movie from their watch-list. 
+
 ![Image](/assets/images/Screenshot-watchlist.jpg)
+
 
 - Deployed Link: 
 - Movie-Hunt Repo: 
