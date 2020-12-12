@@ -150,6 +150,13 @@ $(".prev").on("click", function () {
     console.log(currentPage);
 })
 
+    // init for hamburger for mobile responsivness. Directly from materialize. 
+    document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, instances);
+  });
+
+
 
     var formHandler = function(event) {
     event.preventDefault();
