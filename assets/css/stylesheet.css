@@ -86,7 +86,7 @@ input {
     content: "\2796"; /* Unicode character for "minus" sign (-) */
 }
 
-#most-popular, #new-releases, #critically-acclaimed {
+#most-popular, #new-releases, #critically-acclaimed, #watch-list, #search-results {
     text-align: center;
 }
   
