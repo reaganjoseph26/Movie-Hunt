@@ -16,9 +16,9 @@ The HTML structure and majority of the CSS was done through the framwork of Mate
 
 ## Back End 
 
-## Screenshot 
-An image of the homepage 
-![Image](../assets/Screenshot-home.jpg)
+## Screenshots
+
+![Image](/../assets/Screenshot-home.jpg)
 
 An image of the the results reponse after a search. Notice the pagination fits appropiatley to do the total pages of results for that movie search. The plus buttons on the images indicate that the movie can be added into your watch-list. 
 ![Image](../assets/Screenshot-searches.jpg)
