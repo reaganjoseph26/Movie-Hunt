@@ -98,10 +98,9 @@ input {
     
 }
 
-/* @media screen and (max-width: 992px) {
-    #search-bar {
-        display: block !important;
-
+@media screen and (min-width: 993px) {
+    .ham-search {
+        display: none;
     }
-} */
+}
 
