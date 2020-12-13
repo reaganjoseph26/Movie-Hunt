@@ -102,6 +102,14 @@ input {
     .hide-temp {
         display: none
     }
+
+    iframe, img {
+        width: inherit;
+    }
+
+    #release-date, h1 {
+        text-align: center;
+    }
 }
 
 
