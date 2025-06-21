@@ -37,6 +37,7 @@ var displayWatchList = function ()
     Object.values(localStorage).forEach((value) => 
     {
         savedMovie.push(value);
+        console.log(value)
     });
 
     watchListEl.innerHTML = "";
